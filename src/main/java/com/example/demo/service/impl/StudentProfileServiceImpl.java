@@ -26,7 +26,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
     }
 
     @Override
-    public List<StudentProfile> getAllStudent() {
+    public List<StudentProfile> getAllStudents() {
         return studentRepository.findAll();
     }
 

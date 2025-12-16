@@ -9,6 +9,6 @@ import com.example.Academy.entity.StudentProfile;
 public interface StudentProfileService {
     StudentProfile createStudent(StudentProfile dto);
     StudentProfile getStudentById(Long id);
-    List<StudentProfile> getAllStudent();
+    List<StudentProfile> getAllStudents();
     StudentProfile updateRepeatOffenderStatus(Long StudentId);
 }
