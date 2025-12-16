@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.Academy.entity.StudentProfile;
 
 @Repository
-public interface StudentProfileRepository extends JpaRepository<StudentProfile,Integer> {
+public interface StudentProfileRepository extends JpaRepository<StudentProfile,Long> {
 
-    StudentProfile findById(Long id);
     
 }
