@@ -37,7 +37,7 @@ public class StudentProfileController {
 
     @GetMapping
     public List<StudentProfile> getall() {
-        return studentProfileService.getAllStudent();
+        return studentProfileService.getAllStudents();
     }
 
     @PutMapping("/{id}/repeat-status")
