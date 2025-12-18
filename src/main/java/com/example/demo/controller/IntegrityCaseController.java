@@ -1,4 +1,4 @@
-package com.example.Academy.controller;
+package com.example.demo.controller;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
-import com.example.Academy.entity.IntegrityCase;
-import com.example.Academy.service.IntegrityCaseService;
+import com.example.demo.entity.IntegrityCase;
+import com.example.demo.service.IntegrityCaseService;
 
 
 @RestController
