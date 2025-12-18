@@ -1,30 +1,38 @@
-package com.example.Academy.entity;
+package com.example.demo.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrePersist;
+@Entity
 public class IntegrityCase {
     private Long id;
     private StudentProfile studentProfile;
     private String courseCode;
     private String instructorName;
     private String description;
-    private String status;
+    private String status="OPEN";
     private LocalDate incidentDate;
-    private LocalDateTime createAt;
-    public IntegrityCase(){
-
-    }
+    private LocalDateTime createdAt;
+    
     public IntegrityCase(StudentProfile studentProfile, String courseCode, String instructorName, String description,
-            String status, LocalDate incidentDate, LocalDateTime createAt) {
+            String status, LocalDate incidentDate, LocalDateTime createdAt) {
         this.studentProfile = studentProfile;
         this.courseCode = courseCode;
         this.instructorName = instructorName;
         this.description = description;
         this.status = status;
         this.incidentDate = incidentDate;
-        this.createAt = createAt;
+        this.createdAt = createdAt;
     }
+    public IntegrityCase(){
+
+    }
+    @PrePersist
+protected void onCreate() {
+this.createdAt = LocalDateTime.now();
+}
     public Long getId() {
         return id;
     }
@@ -67,11 +75,11 @@ public class IntegrityCase {
     public void setIncidentDate(LocalDate incidentDate) {
         this.incidentDate = incidentDate;
     }
-    public LocalDateTime getCreateAt() {
-        return createAt;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
     
 
