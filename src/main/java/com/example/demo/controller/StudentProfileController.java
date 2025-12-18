@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Academy.entity.StudentProfile;
-import com.example.Academy.service.StudentProfileService;
+import com.example.demo.entity.StudentProfile;
+import com.example.demo.service.StudentProfileService;
 import jakarta.validation.Valid;
 
 
@@ -22,32 +22,32 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/students")
 public class StudentProfileController {
 
-    @Autowired
-    StudentProfileService studentProfileService;
+@Autowired
+StudentProfileService studentProfileService;
 
-    @PostMapping
-    public StudentProfile create(@Valid @RequestBody StudentProfile student) {
-        return studentProfileService.createStudent(student);
-    }
+@PostMapping
+public StudentProfile create(@Valid @RequestBody StudentProfile student) {
+return studentProfileService.createStudent(student);
+}
 
-    @GetMapping("/{id}")
-    public StudentProfile getbyid(@PathVariable Long id) {
-        return studentProfileService.getStudentById(id);
-    }
+@GetMapping("/{id}")
+public StudentProfile getbyid(@PathVariable Long id) {
+return studentProfileService.getStudentById(id);
+}
 
-    @GetMapping
-    public List<StudentProfile> getall() {
-        return studentProfileService.getAllStudent();
-    }
+@GetMapping
+public List<StudentProfile> getall() {
+return studentProfileService.getAllStudents();
+}
 
-    @PutMapping("/{id}/repeat-status")
-    public ResponseEntity<String> updateRepeatStatus(@PathVariable Long id) {
-        studentProfileService.updateRepeatOffenderStatus(id);
-        return ResponseEntity.ok("Repeat status updated");
-    }
+@PutMapping("/{id}/repeat-status")
+public ResponseEntity<String> updateRepeatStatus(@PathVariable Long id) {
+studentProfileService.updateRepeatOffenderStatus(id);
+return ResponseEntity.ok("Repeat status updated");
+}
 
-    @GetMapping("/lookup/{studentId}")
-    public StudentProfile findByStudentId(@PathVariable Long studentId) {
-        return studentProfileService.getStudentById(studentId);
-    }
+@GetMapping("/lookup/{studentId}")
+public StudentProfile findByStudentId(@PathVariable Long studentId) {
+return studentProfileService.getStudentById(studentId);
+}
 }
