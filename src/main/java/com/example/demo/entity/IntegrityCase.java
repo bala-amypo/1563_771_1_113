@@ -2,11 +2,14 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import jakarta.persistence.Id;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrePersist;
 @Entity
 public class IntegrityCase {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private StudentProfile studentProfile;
     private String courseCode;
