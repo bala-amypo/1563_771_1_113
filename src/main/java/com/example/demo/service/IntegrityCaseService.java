@@ -1,10 +1,10 @@
-package com.example.Academy.service;
+package com.example.demo.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.Academy.entity.IntegrityCase;
+import com.example.demo.entity.IntegrityCase;
 @Service
 public interface IntegrityCaseService {
     IntegrityCase createCase(IntegrityCase integrityCase);
