@@ -46,8 +46,8 @@ public class StudentProfileController {
         return ResponseEntity.ok("Repeat status updated");
     }
 
-    // @GetMapping("/lookup/{studentId}")
-    // public StudentProfile findByStudentId(@PathVariable String studentId) {
-    //     return studentProfileService.findByStudentIdentifier(studentId);
-    // }
+    @GetMapping("/lookup/{studentId}")
+    public StudentProfile getStudentById(@PathVariable String studentId) {
+        return studentProfileService.getStudentById(studentId);
+    }
 }
