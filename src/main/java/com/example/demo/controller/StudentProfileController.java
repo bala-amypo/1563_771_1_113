@@ -37,7 +37,7 @@ public class StudentProfileController {
 
     @GetMapping
     public List<StudentProfile> getall() {
-        return studentProfileService.getAllStudents();
+        return studentProfileService.getAllStudent();
     }
 
     @PutMapping("/{id}/repeat-status")
@@ -47,7 +47,7 @@ public class StudentProfileController {
     }
 
     @GetMapping("/lookup/{studentId}")
-    public StudentProfile getStudentById(@PathVariable String studentId) {
+    public StudentProfile findByStudentId(@PathVariable Long studentId) {
         return studentProfileService.getStudentById(studentId);
     }
 }
