@@ -1,4 +1,4 @@
-package com.example.Academy.service.impl;
+package com.example.demo.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Academy.entity.IntegrityCase;
-import com.example.Academy.repository.IntegrityCaseRepository;
-import com.example.Academy.service.IntegrityCaseService;
+import com.example.demo.entity.IntegrityCase;
+import com.example.demo.repository.IntegrityCaseRepository;
+import com.example.demo.service.IntegrityCaseService;
 
 @Service
 public class IntegrityCaseServiceImpl implements IntegrityCaseService {
