@@ -2,6 +2,9 @@ package com.example.Academy.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+@Entity
 public class StudentProfile {
     public StudentProfile(String studentid, String name, String email, String program, Integer yearLevel,
             Boolean isRepeatOffender, LocalDateTime createAt) {
@@ -13,12 +16,17 @@ public class StudentProfile {
         this.isRepeatOffender = isRepeatOffender;
         this.createAt = createAt;
     }
+
     private Long id;
+
+    @Column(unique = true)
     private String studentid;
     private String name;
+    @Column(unique = true)
     private String email;
     private String program;
     private Integer yearLevel;
+
     private Boolean isRepeatOffender;
     private LocalDateTime createAt;
     public StudentProfile(){
