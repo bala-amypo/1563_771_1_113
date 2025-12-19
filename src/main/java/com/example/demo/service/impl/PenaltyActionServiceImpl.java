@@ -25,11 +25,18 @@ public class PenaltyActionServiceImpl implements PenaltyActionService {
     @Override
     public PenaltyAction getPenaltyActionById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Penalty not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Penalty not found with id: " + id)
+                );
     }
 
     @Override
     public List<PenaltyAction> getAllPenaltyActions() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<PenaltyAction> getPenaltyActionsByCaseId(Long caseId) {
+        return repository.findByIntegrityCaseId(caseId);
     }
 }
