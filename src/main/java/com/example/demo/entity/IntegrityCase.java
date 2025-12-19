@@ -15,7 +15,7 @@ public class IntegrityCase {
     private Long id;
 
     @ManyToOne(name="Student_profile")
-    @Join
+    @JoinColumn
     private StudentProfile studentProfile;
 
     @Column(nullable = false)
