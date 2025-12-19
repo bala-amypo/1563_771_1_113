@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
-import com.example.demo.entity.StudentProfile;
 
 import com.example.demo.entity.IntegrityCase;
 import com.example.demo.service.IntegrityCaseService;
