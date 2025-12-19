@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/evidence")
+@RequestMapping("/api/evidence-records")
 public class EvidenceRecordController {
 
     private final EvidenceRecordService evidenceRecordService;
@@ -19,32 +19,32 @@ public class EvidenceRecordController {
         this.evidenceRecordService = evidenceRecordService;
     }
 
+    /* ===== CREATE EVIDENCE RECORD ===== */
     @PostMapping
-    public ResponseEntity<EvidenceRecord> addEvidence(
+    public ResponseEntity<EvidenceRecord> createEvidence(
             @RequestBody EvidenceRecord evidenceRecord) {
 
-        return new ResponseEntity<>(
-                evidenceRecordService.addEvidence(evidenceRecord),
-                HttpStatus.CREATED
-        );
+        EvidenceRecord saved =
+                evidenceRecordService.createEvidenceRecord(evidenceRecord);
+
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
+    /* ===== GET EVIDENCE BY ID ===== */
     @GetMapping("/{id}")
-    public ResponseEntity<EvidenceRecord> getEvidenceById(@PathVariable Long id) {
-        return ResponseEntity.ok(evidenceRecordService.getEvidenceById(id));
-    }
-
-    @GetMapping("/case/{caseId}")
-    public ResponseEntity<List<EvidenceRecord>> getEvidenceByCase(
-            @PathVariable Long caseId) {
+    public ResponseEntity<EvidenceRecord> getEvidenceById(
+            @PathVariable Long id) {
 
         return ResponseEntity.ok(
-                evidenceRecordService.getEvidenceByCaseId(caseId)
+                evidenceRecordService.getEvidenceRecordById(id)
         );
     }
 
+    /* ===== GET ALL EVIDENCE RECORDS ===== */
     @GetMapping
     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
-        return ResponseEntity.ok(evidenceRecordService.getAllEvidence());
+        return ResponseEntity.ok(
+                evidenceRecordService.getAllEvidenceRecords()
+        );
     }
 }
