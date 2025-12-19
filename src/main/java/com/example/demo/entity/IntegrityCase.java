@@ -45,7 +45,7 @@ public class IntegrityCase {
         }
     }
 
-    public IntegrityCase() {}
+   
 
     public IntegrityCase(StudentProfile studentProfile, String courseCode,
                          String instructorName, String description,
