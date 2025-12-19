@@ -10,33 +10,32 @@ public class StudentProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //
+    private Long id; 
 
     @Column(unique = true, nullable = false)
-    private String studentId; // Matches requirement: studentId must be unique
+    private String studentId; 
 
-    private String name; //
+    private String name; 
 
     @Column(unique = true, nullable = false)
-    private String email; // Matches requirement: email must be unique
+    private String email;
 
-    private String program; //
+    private String program; 
     
-    private Integer yearLevel; //
+    private Integer yearLevel; 
 
-    private Boolean isRepeatOffender = false; //
+    private Boolean isRepeatOffender = false; 
 
-    private LocalDateTime createdAt; //
+    private LocalDateTime createdAt; 
 
-    @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL)
-    private List<IntegrityCase> integrityCases = new ArrayList<>(); //
-
+   
+@OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL)
+private List<IntegrityCase> integrityCases = new ArrayList<>();
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now(); //
     }
 
-    // --- FIX 1: Removed Duplicate Constructor ---
     public StudentProfile() {} //
 
     public StudentProfile(String studentId, String name, String email, String program, Integer yearLevel) {
@@ -47,7 +46,6 @@ public class StudentProfile {
         this.yearLevel = yearLevel;
     }
 
-    // --- GETTERS AND SETTERS ---
 
     public Long getId() {
         return id;
@@ -57,7 +55,6 @@ public class StudentProfile {
         this.id = id;
     }
 
-    // --- FIX 2: Corrected Case-Sensitivity (studentId vs studentid) ---
     public String getStudentId() {
         return studentId;
     }
