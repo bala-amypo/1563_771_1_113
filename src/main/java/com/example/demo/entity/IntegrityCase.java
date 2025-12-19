@@ -28,8 +28,8 @@ public class IntegrityCase {
     @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
     private List<EvidenceRecord> evidenceRecords = new ArrayList<>();
 
-    @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
-    private List<PenaltyAction> penaltyActions = new ArrayList<>();
+    // @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
+    // private List<PenaltyAction> penaltyActions = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {
