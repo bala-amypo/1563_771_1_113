@@ -10,7 +10,7 @@ import com.example.demo.repository.StudentProfileRepository;
 import com.example.demo.repository.IntegrityCaseRepository;
 import com.example.demo.repository.RepeatOffenderRecordRepository;
 import com.example.demo.service.RepeatOffenderRecordService;
-import com.example.demo.util.RepeatOffenderCalculator;
+// import com.example.demo.util.RepeatOffenderCalculator;
 
 @Service
 public class RepeatOffenderRecordServiceImpl
@@ -19,18 +19,17 @@ public class RepeatOffenderRecordServiceImpl
     private final StudentProfileRepository studentRepo;
     private final IntegrityCaseRepository caseRepo;
     private final RepeatOffenderRecordRepository repeatRepo;
-    private final RepeatOffenderCalculator calculator;
+    // private final RepeatOffenderCalculator calculator;
 
     public RepeatOffenderRecordServiceImpl(
             StudentProfileRepository studentRepo,
             IntegrityCaseRepository caseRepo,
-            RepeatOffenderRecordRepository repeatRepo,
-            RepeatOffenderCalculator calculator) {
+            RepeatOffenderRecordRepository repeatRepo) {
 
         this.studentRepo = studentRepo;
         this.caseRepo = caseRepo;
         this.repeatRepo = repeatRepo;
-        this.calculator = calculator;
+        // this.calculator = calculator;
     }
 
     @Override
