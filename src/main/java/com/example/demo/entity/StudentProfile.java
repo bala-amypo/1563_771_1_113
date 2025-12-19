@@ -25,6 +25,8 @@ private LocalDateTime createdAt;
 protected void onCreate() {
 this.createdAt = LocalDateTime.now();
 }
+@OneToMany(mappedby="studentProfile")
+public<List> lis
 public StudentProfile(String studentid, String name, String email, String program, Integer yearLevel,
 Boolean isRepeatOffender, LocalDateTime createdAt) {
 this.studentid = studentid;

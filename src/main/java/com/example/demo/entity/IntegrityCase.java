@@ -14,8 +14,8 @@ public class IntegrityCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(name="Student_profile")
-    @JoinColumn
+    @ManyToOne
+    @JoinColumn(name="Student_profile")
     private StudentProfile studentProfile;
 
     @Column(nullable = false)
