@@ -20,8 +20,6 @@ public class StudentProfile {
     @Column(nullable = false)
     private boolean repeatOffender = false;
 
-   
-
     public Long getId() {
         return id;
     }
