@@ -1,29 +1,51 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import com.example.demo.entity.StudentProfile;
+
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "integrity_cases")
 public class IntegrityCase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name="Student_profile")
     private StudentProfile studentProfile;
 
+    @Column(nullable = false)
     private String courseCode;
+
+    @Column(nullable = false)
+    private String instructorName;
+
+    @Column(length = 1000)
     private String description;
-    private String status = "OPEN"; 
+
+    @Column(nullable = false)
+    private String status; 
+
+    @Column(nullable = false)
+    private LocalDate incidentDate;
+
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+        if (this.status == null) {
+            this.status = "OPEN";
+        }
     }
+
+   
 
     public IntegrityCase(StudentProfile studentProfile, String courseCode,
                          String instructorName, String description,
@@ -91,6 +113,3 @@ public class IntegrityCase {
         return createdAt;
     }
 }
-   
-
-    
