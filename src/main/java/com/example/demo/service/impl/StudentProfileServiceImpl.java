@@ -11,24 +11,32 @@ import java.util.List;
 @Service
 public class StudentProfileServiceImpl implements StudentProfileService {
 
-    private final StudentProfileRepository studentProfileRepository;
+    private final StudentProfileRepository repository;
 
-    public StudentProfileServiceImpl(StudentProfileRepository studentProfileRepository) {
-        this.studentProfileRepository = studentProfileRepository;
+    public StudentProfileServiceImpl(StudentProfileRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public StudentProfile createStudent(StudentProfile studentProfile) {
-        return studentProfileRepository.save(studentProfile);
+        return repository.save(studentProfile);
     }
 
     @Override
-    public StudentProfile getByStudentIdentifier(String studentIdentifier) {
-        return studentProfileRepository.findByStudentIdentifier(studentIdentifier);
+    public StudentProfile getStudentById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    }
+
+    @Override
+    public StudentProfile updateRepeatOffenderStatus(Long id) {
+        StudentProfile student = getStudentById(id);
+        student.setRepeatOffender(true);
+        return repository.save(student);
     }
 
     @Override
     public List<StudentProfile> getAllStudents() {
-        return studentProfileRepository.findAll();
+        return repository.findAll();
     }
 }

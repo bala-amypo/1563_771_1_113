@@ -8,7 +8,9 @@ public interface StudentProfileService {
 
     StudentProfile createStudent(StudentProfile studentProfile);
 
-    StudentProfile getByStudentIdentifier(String studentIdentifier);
+    StudentProfile getStudentById(Long id);
+
+    StudentProfile updateRepeatOffenderStatus(Long id);
 
     List<StudentProfile> getAllStudents();
 }
