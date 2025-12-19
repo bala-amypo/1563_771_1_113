@@ -1,16 +1,42 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.EvidenceRecord;
+import com.example.demo.repository.EvidenceRecordRepository;
+import com.example.demo.service.EvidenceRecordService;
+
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-public interface EvidenceRecordService {
+@Service
+public class EvidenceRecordServiceImpl implements EvidenceRecordService {
 
-    EvidenceRecord createEvidenceRecord(EvidenceRecord evidenceRecord);
+    private final EvidenceRecordRepository repository;
 
-    EvidenceRecord getEvidenceRecordById(Long id);
+    public EvidenceRecordServiceImpl(EvidenceRecordRepository repository) {
+        this.repository = repository;
+    }
 
-    List<EvidenceRecord> getAllEvidenceRecords();
+    @Override
+    public EvidenceRecord createEvidenceRecord(EvidenceRecord evidenceRecord) {
+        return repository.save(evidenceRecord);
+    }
 
-    // ✅ REQUIRED
-    List<EvidenceRecord> getEvidenceRecordsByCaseId(Long caseId);
+    @Override
+    public EvidenceRecord getEvidenceRecordById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Evidence not found with id: " + id)
+                );
+    }
+
+    @Override
+    public List<EvidenceRecord> getAllEvidenceRecords() {
+        return repository.findAll();
+    }
+
+    @Override
+    public List<EvidenceRecord> getEvidenceRecordsByCaseId(Long caseId) {
+        return repository.findByIntegrityCaseId(caseId);
+    }
 }

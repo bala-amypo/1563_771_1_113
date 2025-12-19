@@ -10,4 +10,7 @@ public interface EvidenceRecordService {
     EvidenceRecord getEvidenceRecordById(Long id);
 
     List<EvidenceRecord> getAllEvidenceRecords();
+
+    // ✅ REQUIRED
+    List<EvidenceRecord> getEvidenceRecordsByCaseId(Long caseId);
 }
