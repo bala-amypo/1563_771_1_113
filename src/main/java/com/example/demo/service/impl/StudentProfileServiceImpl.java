@@ -1,13 +1,13 @@
-package com.example.Academy.service.impl;
+package com.example.demo.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Academy.entity.StudentProfile;
-import com.example.Academy.repository.StudentProfileRepository;
-import com.example.Academy.service.StudentProfileService;
+import com.example.demo.entity.StudentProfile;
+import com.example.demo.repository.StudentProfileRepository;
+import com.example.demo.service.StudentProfileService;
 
 @Service
 public class StudentProfileServiceImpl implements StudentProfileService {
