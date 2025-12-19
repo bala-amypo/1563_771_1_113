@@ -46,4 +46,8 @@ studentProfileService.updateRepeatOffenderStatus(id);
 return ResponseEntity.ok("Repeat status updated");
 }
 
+@GetMapping("/lookup/{studentId}")
+public StudentProfile findByStudentId(@PathVariable Long studentId) {
+return studentProfileService.getStudentById(studentId);
+}
 }
