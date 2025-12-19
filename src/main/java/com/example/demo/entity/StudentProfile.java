@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 import java.util.*;
-import com.example.demo.entity.IntegrityCase;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
