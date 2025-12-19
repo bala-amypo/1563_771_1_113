@@ -25,8 +25,8 @@ public class IntegrityCase {
     private LocalDate incidentDate;
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
-    private List<EvidenceRecord> evidenceRecords = new ArrayList<>();
+    // @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
+    // private List<EvidenceRecord> evidenceRecords = new ArrayList<>();
 
     // @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
     // private List<PenaltyAction> penaltyActions = new ArrayList<>();
