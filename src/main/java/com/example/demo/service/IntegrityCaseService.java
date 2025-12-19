@@ -1,16 +1,17 @@
-// package com.example.demo.service;
+package com.example.demo.service;
 
-// import java.util.List;
+import java.util.List;
+import com.example.demo.entity.IntegrityCase;
 
-// import org.springframework.stereotype.Service;
+public interface IntegrityCaseService {
 
-// import com.example.demo.entity.IntegrityCase;
-// @Service
-// public interface IntegrityCaseService {
-//     IntegrityCase createCase(IntegrityCase integrityCase);
-//     IntegrityCase updateCaseStatus(Long caseId, String status);
-//     List<IntegrityCase> getCasesByStudent(Long studentId);
-//     List<IntegrityCase> getAllCases();
-//     IntegrityCase getCaseById(Long id);
-    
-// }
+    IntegrityCase createCase(IntegrityCase integrityCase);
+
+    IntegrityCase updateCaseStatus(Long caseId, String status);
+
+    List<IntegrityCase> getCasesByStudent(Long studentId);
+
+    List<IntegrityCase> getAllCases();
+
+    IntegrityCase getCaseById(Long id);
+}

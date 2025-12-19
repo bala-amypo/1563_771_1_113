@@ -1,14 +1,15 @@
-// package com.example.Academy.service;
+package com.example.demo.service;
 
-// import java.util.List;
+import java.util.List;
+import com.example.demo.entity.EvidenceRecord;
 
-// import org.springframework.stereotype.Service;
+public interface EvidenceRecordService {
 
-// import com.example.Academy.entity.EvidenceRecord;
-// @Service
-// public interface EvidenceRecordService {
-//     EvidenceRecord submitEvidence(EvidenceRecord evidence);
-//     List<EvidenceRecord> getEvidenceByCase(Long caseId);
-//     EvidenceRecord getEvidenceById(Long id);
-//     EvidenceRecord getAllEvidence();
-// }
+    EvidenceRecord submitEvidence(EvidenceRecord evidence);
+
+    List<EvidenceRecord> getEvidenceByCase(Long caseId);
+
+    EvidenceRecord getEvidenceById(Long id);
+
+    List<EvidenceRecord> getAllEvidence();
+}

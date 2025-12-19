@@ -1,13 +1,13 @@
-// package com.example.Academy.service;
+package com.example.demo.service;
 
-// import java.util.List;
+import java.util.List;
+import com.example.demo.entity.RepeatOffenderRecord;
 
-// import org.springframework.stereotype.Service;
+public interface RepeatOffenderRecordService {
 
-// import com.example.Academy.entity.RepeatOffenderRecord;
-// @Service
-// public interface RepeatOffenderRecordService {
-//     RepeatOffenderRecord refreshRepeatOffernderData(Long studentId);
-//     RepeatOffenderRecord getRecordByStudent( Long studentId);
-//     List<PenaltyActionService> getAllRepeatOffenders();
-// }
+    void refreshRepeatOffenderData(Long studentId);
+
+    RepeatOffenderRecord getRecordByStudent(Long studentId);
+
+    List<RepeatOffenderRecord> getAllRepeatOffenders();
+}

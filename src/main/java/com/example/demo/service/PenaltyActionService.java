@@ -1,14 +1,15 @@
-// package com.example.Academy.service;
+package com.example.demo.service;
 
-// import java.util.List;
+import java.util.List;
+import com.example.demo.entity.PenaltyAction;
 
-// import org.springframework.stereotype.Service;
+public interface PenaltyActionService {
 
-// import com.example.Academy.entity.PenaltyAction;
-// @Service
-// public interface PenaltyActionService {
-//     PenaltyAction addPenalty(PenaltyAction penalty);
-//     List<PenaltyAction> getPenaltiesByCase(Long caseId);
-//     PenaltyAction getPenaltyById(Long id);
-//     List<PenaltyAction> getAllPenalties();
-// }
+    PenaltyAction addPenalty(PenaltyAction penalty);
+
+    List<PenaltyAction> getPenaltiesByCase(Long caseId);
+
+    PenaltyAction getPenaltyById(Long id);
+
+    List<PenaltyAction> getAllPenalties();
+}
