@@ -3,40 +3,22 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "student_profile",
-       uniqueConstraints = {
-           @UniqueConstraint(columnNames = "student_identifier"),
-           @UniqueConstraint(columnNames = "email")
-       })
+@Table(name = "student_profile")
 public class StudentProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "student_identifier", nullable = false, unique = true, length = 50)
+    @Column(nullable = false, unique = true)
     private String studentIdentifier;
 
-    @Column(nullable = false, length = 100)
     private String name;
-
-    @Column(nullable = false, unique = true, length = 100)
     private String email;
-
-    @Column(length = 20)
     private String department;
 
-    /* ===== Constructors ===== */
-
-    public StudentProfile() {
-    }
-
-    public StudentProfile(String studentIdentifier, String name, String email, String department) {
-        this.studentIdentifier = studentIdentifier;
-        this.name = name;
-        this.email = email;
-        this.department = department;
-    }
+    @Column(nullable = false)
+    private boolean repeatOffender = false;
 
     /* ===== Getters & Setters ===== */
 
@@ -78,5 +60,13 @@ public class StudentProfile {
     
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public boolean isRepeatOffender() {
+        return repeatOffender;
+    }
+
+    public void setRepeatOffender(boolean repeatOffender) {
+        this.repeatOffender = repeatOffender;
     }
 }
