@@ -1,52 +1,55 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import java.util.List;
+import com.example.demo.entity.IntegrityCase;
+import com.example.demo.service.IntegrityCaseService;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RestController;
-// import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-// import com.example.demo.entity.IntegrityCase;
-// import com.example.demo.service.IntegrityCaseService;
+import java.util.List;
 
+@RestController
+@RequestMapping("/api/integrity-cases")
+public class IntegrityCaseController {
 
-// @RestController
-// @RequestMapping("/api/cases")
-// public class IntegrityCaseController {
+    private final IntegrityCaseService integrityCaseService;
 
-//     @Autowired
-//     IntegrityCaseService integrityCaseService;
+    public IntegrityCaseController(IntegrityCaseService integrityCaseService) {
+        this.integrityCaseService = integrityCaseService;
+    }
 
-//     @PostMapping
-//     public IntegrityCase create(@Valid @RequestBody IntegrityCase integrityCase) {
-//         return integrityCaseService.createCase(integrityCase);
-//     }
+    @PostMapping
+    public ResponseEntity<IntegrityCase> createCase(
+            @RequestBody IntegrityCase integrityCase) {
 
-//     @PutMapping("/{id}/status")
-//     public ResponseEntity<String> updateCaseStatus(@PathVariable Long id) {
-//         integrityCaseService.updateCaseStatus(id, null);
-//         return ResponseEntity.ok("Case status updated");
-//     }
+        return new ResponseEntity<>(
+                integrityCaseService.createCase(integrityCase),
+                HttpStatus.CREATED
+        );
+    }
 
-//     @GetMapping("/student/{studentId}")
-//     public List<IntegrityCase> getByStudent(@PathVariable Long studentId) {
-//         return integrityCaseService.getCasesByStudent(studentId);
-//     }
+    @GetMapping("/{id}")
+    public ResponseEntity<IntegrityCase> getCaseById(@PathVariable Long id) {
+        return ResponseEntity.ok(integrityCaseService.getCaseById(id));
+    }
 
-//     @GetMapping("/{id}")
-//     public IntegrityCase getById(@PathVariable Long id) {
-//         return integrityCaseService.getCaseById(id);
-//     }
+    @GetMapping("/student/{studentIdentifier}")
+    public ResponseEntity<List<IntegrityCase>> getCasesByStudent(
+            @PathVariable String studentIdentifier) {
 
-//     @GetMapping
-//     public List<IntegrityCase> getAll() {
-//         return integrityCaseService.getAllCases();
-//     }
-// }
+        return ResponseEntity.ok(
+                integrityCaseService.getCasesByStudentIdentifier(studentIdentifier)
+        );
+    }
+
+    @PutMapping("/{id}/resolve")
+    public ResponseEntity<IntegrityCase> resolveCase(@PathVariable Long id) {
+        return ResponseEntity.ok(integrityCaseService.resolveCase(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<IntegrityCase>> getAllCases() {
+        return ResponseEntity.ok(integrityCaseService.getAllCases());
+    }
+}
