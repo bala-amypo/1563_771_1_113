@@ -1,51 +1,40 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import com.example.demo.entity.StudentProfile;
-
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "integrity_cases")
 public class IntegrityCase {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="Student_profile")
+    @JoinColumn(name = "student_profile_id", nullable = false)
     private StudentProfile studentProfile;
 
-    @Column(nullable = false)
     private String courseCode;
-
-    @Column(nullable = false)
     private String instructorName;
-
-    @Column(length = 1000)
     private String description;
-
-    @Column(nullable = false)
-    private String status; 
-
-    @Column(nullable = false)
+    
+    private String status = "OPEN";
+    
     private LocalDate incidentDate;
-
-    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    
+    @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
+    private List<EvidenceRecord> evidenceRecords = new ArrayList<>();
+
+    @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
+    private List<PenaltyAction> penaltyActions = new ArrayList<>();
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
-        if (this.status == null) {
-            this.status = "OPEN";
-        }
     }
-
-   
 
     public IntegrityCase(StudentProfile studentProfile, String courseCode,
                          String instructorName, String description,

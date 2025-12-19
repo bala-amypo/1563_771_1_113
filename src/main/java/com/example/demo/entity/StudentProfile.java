@@ -10,31 +10,31 @@ public class StudentProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Long, PK
+    private Long id; 
 
     @Column(unique = true, nullable = false)
-    private String studentId; // studentId must be unique
+    private String studentId; 
 
-    private String name; // name (String)
+    private String name; 
 
     @Column(unique = true, nullable = false)
-    private String email; // email must be unique
+    private String email; 
 
-    private String program; // program (String)
+    private String program; 
     
-    private Integer yearLevel; // yearLevel (Integer)
+    private Integer yearLevel; 
 
-    private Boolean isRepeatOffender = false; // auto-updated when multiple cases exist
+    private Boolean isRepeatOffender = false; 
 
-    private LocalDateTime createdAt; // createdAt (LocalDateTime)
+    private LocalDateTime createdAt; 
 
-    // RELATIONSHIPS
+    
     
     @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL)
     private List<IntegrityCase> integrityCases = new ArrayList<>();
 
-    @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL)
-    private List<RepeatOffenderRecord> repeatOffenderRecords = new ArrayList<>();
+    // @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL)
+    // private List<RepeatOffenderRecord> repeatOffenderRecords = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {
