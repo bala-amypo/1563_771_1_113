@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 import java.util.*;
+import com.example.demo.entity.IntegrityCase;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
@@ -25,8 +26,8 @@ private LocalDateTime createdAt;
 protected void onCreate() {
 this.createdAt = LocalDateTime.now();
 }
-// @OneToMany(mappedBy="studentProfile")
-// public List<IntegrityCase> lis=new ArrayList<>();
+@OneToMany(mappedBy="studentProfile")
+public List<IntegrityCase> lis=new ArrayList<>();
 public StudentProfile(String studentid, String name, String email, String program, Integer yearLevel,
 Boolean isRepeatOffender, LocalDateTime createdAt) {
 this.studentid = studentid;
