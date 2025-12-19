@@ -13,8 +13,8 @@ public class IntegrityCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "student_profile_id", nullable = false)
+    // @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    // @JoinColumn(name = "student_profile_id", nullable = false)
     private StudentProfile studentProfile;
 
     @Column(nullable = false)
