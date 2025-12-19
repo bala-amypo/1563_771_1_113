@@ -20,7 +20,7 @@ public class StudentProfile {
     @Column(nullable = false)
     private boolean repeatOffender = false;
 
-    /* ===== Getters & Setters ===== */
+   
 
     public Long getId() {
         return id;

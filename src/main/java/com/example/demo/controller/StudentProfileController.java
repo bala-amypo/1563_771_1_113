@@ -36,7 +36,6 @@ public class StudentProfileController {
         );
     }
 
-    // ✅ REQUIRED ENDPOINT
     @GetMapping("/lookup/{studentId}")
     public ResponseEntity<StudentProfile> getStudentByStudentIdentifier(
             @PathVariable String studentId) {
