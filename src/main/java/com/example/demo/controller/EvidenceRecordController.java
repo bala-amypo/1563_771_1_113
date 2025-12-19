@@ -40,6 +40,16 @@ public class EvidenceRecordController {
         );
     }
 
+    /* ===== GET EVIDENCE BY CASE ID (✅ REQUIRED) ===== */
+    @GetMapping("/case/{caseId}")
+    public ResponseEntity<List<EvidenceRecord>> getEvidenceByCaseId(
+            @PathVariable Long caseId) {
+
+        return ResponseEntity.ok(
+                evidenceRecordService.getEvidenceRecordsByCaseId(caseId)
+        );
+    }
+
     /* ===== GET ALL EVIDENCE RECORDS ===== */
     @GetMapping
     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
