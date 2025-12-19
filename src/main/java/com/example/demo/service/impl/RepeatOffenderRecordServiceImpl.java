@@ -1,54 +1,36 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import com.example.demo.entity.RepeatOffenderRecord;
-import com.example.demo.entity.StudentProfile;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.StudentProfileRepository;
-import com.example.demo.repository.IntegrityCaseRepository;
 import com.example.demo.repository.RepeatOffenderRecordRepository;
 import com.example.demo.service.RepeatOffenderRecordService;
-// import com.example.demo.util.RepeatOffenderCalculator;
+
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
-public class RepeatOffenderRecordServiceImpl
-        implements RepeatOffenderRecordService {
+public class RepeatOffenderRecordServiceImpl implements RepeatOffenderRecordService {
 
-    private final StudentProfileRepository studentRepo;
-    private final IntegrityCaseRepository caseRepo;
-    private final RepeatOffenderRecordRepository repeatRepo;
-    // private final RepeatOffenderCalculator calculator;
+    private final RepeatOffenderRecordRepository repository;
 
     public RepeatOffenderRecordServiceImpl(
-            StudentProfileRepository studentRepo,
-            IntegrityCaseRepository caseRepo,
-            RepeatOffenderRecordRepository repeatRepo) {
-
-        this.studentRepo = studentRepo;
-        this.caseRepo = caseRepo;
-        this.repeatRepo = repeatRepo;
-        // this.calculator = calculator;
+            RepeatOffenderRecordRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public void refreshRepeatOffenderData(Long studentId) {
-        StudentProfile student = studentRepo.findById(studentId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found"));
+    public RepeatOffenderRecord createRecord(RepeatOffenderRecord record) {
+        return repository.save(record);
     }
 
     @Override
-    public RepeatOffenderRecord getRecordByStudent(Long studentId) {
-        StudentProfile student = studentRepo.findById(studentId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found"));
-        return repeatRepo.findByStudentProfile(student);
+    public RepeatOffenderRecord getRecordById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Record not found"));
     }
 
     @Override
-    public List<RepeatOffenderRecord> getAllRepeatOffenders() {
-        return repeatRepo.findAll();
+    public List<RepeatOffenderRecord> getAllRecords() {
+        return repository.findAll();
     }
 }

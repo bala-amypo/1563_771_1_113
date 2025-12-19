@@ -1,47 +1,35 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import com.example.demo.entity.EvidenceRecord;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.EvidenceRecordRepository;
-import com.example.demo.repository.IntegrityCaseRepository;
 import com.example.demo.service.EvidenceRecordService;
+
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EvidenceRecordServiceImpl implements EvidenceRecordService {
 
-    private final EvidenceRecordRepository evidenceRepo;
-    private final IntegrityCaseRepository caseRepo;
+    private final EvidenceRecordRepository repository;
 
-    public EvidenceRecordServiceImpl(
-            EvidenceRecordRepository evidenceRepo,
-            IntegrityCaseRepository caseRepo) {
-
-        this.evidenceRepo = evidenceRepo;
-        this.caseRepo = caseRepo;
+    public EvidenceRecordServiceImpl(EvidenceRecordRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public EvidenceRecord submitEvidence(EvidenceRecord evidence) {
-        return evidenceRepo.save(evidence);
+    public EvidenceRecord createEvidenceRecord(EvidenceRecord evidenceRecord) {
+        return repository.save(evidenceRecord);
     }
 
     @Override
-    public List<EvidenceRecord> getEvidenceByCase(Long caseId) {
-        return evidenceRepo.findByIntegrityCaseId(caseId);
+    public EvidenceRecord getEvidenceRecordById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Evidence not found"));
     }
 
     @Override
-    public EvidenceRecord getEvidenceById(Long id) {
-        return evidenceRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Evidence not found"));
-    }
-
-    @Override
-    public List<EvidenceRecord> getAllEvidence() {
-        return evidenceRepo.findAll();
+    public List<EvidenceRecord> getAllEvidenceRecords() {
+        return repository.findAll();
     }
 }

@@ -34,6 +34,14 @@ public class IntegrityCase {
     public void setId(Long id) {
         this.id = id;
     }
+     public String getStatus() {
+        return status;
+    }
+
+    // ✅ REQUIRED
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getStudentIdentifier() {
         return studentIdentifier;

@@ -1,15 +1,13 @@
 package com.example.demo.service;
 
-import java.util.List;
 import com.example.demo.entity.EvidenceRecord;
+import java.util.List;
 
 public interface EvidenceRecordService {
 
-    EvidenceRecord submitEvidence(EvidenceRecord evidence);
+    EvidenceRecord createEvidenceRecord(EvidenceRecord evidenceRecord);
 
-    List<EvidenceRecord> getEvidenceByCase(Long caseId);
+    EvidenceRecord getEvidenceRecordById(Long id);
 
-    EvidenceRecord getEvidenceById(Long id);
-
-    List<EvidenceRecord> getAllEvidence();
+    List<EvidenceRecord> getAllEvidenceRecords();
 }
