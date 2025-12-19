@@ -13,4 +13,7 @@ public interface StudentProfileService {
     StudentProfile updateRepeatOffenderStatus(Long id);
 
     List<StudentProfile> getAllStudents();
+
+    // ✅ REQUIRED
+    StudentProfile getStudentByStudentIdentifier(String studentIdentifier);
 }

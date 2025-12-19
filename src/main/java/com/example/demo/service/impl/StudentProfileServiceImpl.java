@@ -25,7 +25,9 @@ public class StudentProfileServiceImpl implements StudentProfileService {
     @Override
     public StudentProfile getStudentById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+                .orElseThrow(() ->
+                        new RuntimeException("Student not found with id: " + id)
+                );
     }
 
     @Override
@@ -38,5 +40,15 @@ public class StudentProfileServiceImpl implements StudentProfileService {
     @Override
     public List<StudentProfile> getAllStudents() {
         return repository.findAll();
+    }
+
+    @Override
+    public StudentProfile getStudentByStudentIdentifier(String studentIdentifier) {
+        return repository.findByStudentIdentifier(studentIdentifier)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Student not found with studentIdentifier: " + studentIdentifier
+                        )
+                );
     }
 }

@@ -31,7 +31,19 @@ public class StudentProfileController {
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentProfile> getStudentById(@PathVariable Long id) {
-        return ResponseEntity.ok(studentProfileService.getStudentById(id));
+        return ResponseEntity.ok(
+                studentProfileService.getStudentById(id)
+        );
+    }
+
+    // ✅ REQUIRED ENDPOINT
+    @GetMapping("/lookup/{studentId}")
+    public ResponseEntity<StudentProfile> getStudentByStudentIdentifier(
+            @PathVariable String studentId) {
+
+        return ResponseEntity.ok(
+                studentProfileService.getStudentByStudentIdentifier(studentId)
+        );
     }
 
     @PutMapping("/{id}/repeat-offender")
@@ -43,6 +55,8 @@ public class StudentProfileController {
 
     @GetMapping
     public ResponseEntity<List<StudentProfile>> getAllStudents() {
-        return ResponseEntity.ok(studentProfileService.getAllStudents());
+        return ResponseEntity.ok(
+                studentProfileService.getAllStudents()
+        );
     }
 }
