@@ -48,11 +48,8 @@ public class IntegrityCaseServiceImpl implements IntegrityCaseService {
         IntegrityCase c = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Case not found"));
 
-        if ("OPEN".equalsIgnoreCase(c.getStatus())) {
+        
         c.setStatus("RESOLVED");
-    } else {
-        c.setStatus("OPEN");
-    }
 
         // No save() required — JPA dirty checking updates DB
         return c;
