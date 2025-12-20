@@ -41,7 +41,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
                         new RuntimeException("Student not found with id: " + id)
                 );
 
-        student.setRepeatOffender(true);
+        student.setRepeatOffender(!student.isRepeatOffender());
 
         // 🔹 No need to call save(), JPA auto-dirty-checking will update
         return student;
