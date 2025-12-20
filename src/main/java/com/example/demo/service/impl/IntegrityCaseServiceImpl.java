@@ -34,17 +34,17 @@ public class IntegrityCaseServiceImpl implements IntegrityCaseService {
         return repository.findAll();
     }
 
-    // ✅ REQUIRED
+    
     @Override
     public List<IntegrityCase> getCasesByStudentIdentifier(String studentIdentifier) {
         return repository.findByStudentIdentifier(studentIdentifier);
     }
 
-    // ✅ REQUIRED
+    
     @Override
     public IntegrityCase resolveCase(Long id) {
         IntegrityCase c = getCaseById(id);
-        c.setStatus("RESOLVED");   // ✅ now works
+        c.setStatus("RESOLVED");   
         return repository.save(c);
     }
 }
