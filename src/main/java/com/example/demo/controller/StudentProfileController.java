@@ -36,7 +36,6 @@ public class StudentProfileController {
         );
     }
 
-    // ✅ LOOKUP BY studentIdentifier
     @GetMapping("/lookup/{studentId}")
     public ResponseEntity<StudentProfile> getStudentByStudentIdentifier(
             @PathVariable String studentId) {
@@ -46,8 +45,13 @@ public class StudentProfileController {
         );
     }
 
+    // ✅ THIS CREATES EDIT SPACE IN SWAGGER
     @PutMapping("/{id}/repeat-offender")
-    public ResponseEntity<StudentProfile> markRepeatOffender(@PathVariable Long id) {
+    public ResponseEntity<StudentProfile> markRepeatOffender(
+            @PathVariable Long id,
+            @RequestBody StudentProfile ignoredBody) {
+
+        // Body is only for Swagger edit space
         return ResponseEntity.ok(
                 studentProfileService.updateRepeatOffenderStatus(id)
         );
