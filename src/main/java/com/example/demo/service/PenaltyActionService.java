@@ -11,6 +11,6 @@ public interface PenaltyActionService {
 
     List<PenaltyAction> getAllPenaltyActions();
 
-    // ✅ REQUIRED
+    
     List<PenaltyAction> getPenaltyActionsByCaseId(Long caseId);
 }
