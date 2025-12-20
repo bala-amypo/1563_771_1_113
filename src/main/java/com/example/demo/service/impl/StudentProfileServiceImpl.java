@@ -5,10 +5,12 @@ import com.example.demo.repository.StudentProfileRepository;
 import com.example.demo.service.StudentProfileService;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional   // 🔴 THIS IS CRITICAL
 public class StudentProfileServiceImpl implements StudentProfileService {
 
     private final StudentProfileRepository repository;
@@ -32,9 +34,17 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
     @Override
     public StudentProfile updateRepeatOffenderStatus(Long id) {
-        StudentProfile student = getStudentById(id);
+
+        // 🔹 Managed entity inside transaction
+        StudentProfile student = repository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Student not found with id: " + id)
+                );
+
         student.setRepeatOffender(true);
-        return repository.save(student);
+
+        // 🔹 No need to call save(), JPA auto-dirty-checking will update
+        return student;
     }
 
     @Override

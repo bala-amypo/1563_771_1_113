@@ -31,7 +31,9 @@ public class IntegrityCaseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<IntegrityCase> getCaseById(@PathVariable Long id) {
-        return ResponseEntity.ok(integrityCaseService.getCaseById(id));
+        return ResponseEntity.ok(
+                integrityCaseService.getCaseById(id)
+        );
     }
 
     @GetMapping("/student/{studentIdentifier}")
@@ -43,13 +45,22 @@ public class IntegrityCaseController {
         );
     }
 
+    // ✅ PUT WITH REQUEST BODY (EDIT SPACE VISIBLE IN SWAGGER)
     @PutMapping("/{id}/resolve")
-    public ResponseEntity<IntegrityCase> resolveCase(@PathVariable Long id) {
-        return ResponseEntity.ok(integrityCaseService.resolveCase(id));
+    public ResponseEntity<IntegrityCase> resolveCase(
+            @PathVariable Long id,
+            @RequestBody IntegrityCase ignoredBody) {
+
+        // RequestBody is ONLY for Swagger UI
+        return ResponseEntity.ok(
+                integrityCaseService.resolveCase(id)
+        );
     }
 
     @GetMapping
     public ResponseEntity<List<IntegrityCase>> getAllCases() {
-        return ResponseEntity.ok(integrityCaseService.getAllCases());
+        return ResponseEntity.ok(
+                integrityCaseService.getAllCases()
+        );
     }
 }
