@@ -21,7 +21,7 @@ public class StudentProfile {
 
 
     @Column(nullable = false)
-    private boolean repeatOffender = false;
+    private boolean isrepeatOffender = false;
     private LocalDateTime createdAt;
 public StudentProfile(String StudentIdentifier, String name, String email, String program, Integer yearLevel,
             Boolean isRepeatOffender, LocalDateTime createdAt) {
