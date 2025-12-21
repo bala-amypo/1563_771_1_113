@@ -72,7 +72,7 @@ public StudentProfile(String studentIdentifier, String name, String email, Strin
         this.yearLevel = yearLevel;
     }
     public Boolean getRepeatOffender() {
-        return isRepeatOffender;
+        return RepeatOffender;
     }
     public void setRepeatOffender(Boolean RepeatOffender) {
         this.RepeatOffender = RepeatOffender;
