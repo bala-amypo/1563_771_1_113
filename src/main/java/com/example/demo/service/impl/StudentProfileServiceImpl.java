@@ -41,7 +41,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
                         new RuntimeException("Student not found with id: " + id)
                 );
 
-        student.setIsRepeatOffender(!student.isRepeatOffender());
+        student.setRepeatOffender(!student.isRepeatOffender());
 
         return student;
     }

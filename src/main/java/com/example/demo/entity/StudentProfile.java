@@ -21,16 +21,16 @@ public class StudentProfile {
 
 
     @Column(nullable = false)
-    private boolean isRepeatOffender = false;
+    private boolean RepeatOffender = false;
     private LocalDateTime createdAt;
 public StudentProfile(String studentIdentifier, String name, String email, String program, Integer yearLevel,
-            Boolean isRepeatOffender, LocalDateTime createdAt) {
+            Boolean RepeatOffender, LocalDateTime createdAt) {
         this.studentIdentifier = studentIdentifier;
         this.name = name;
         this.email = email;
         this.program = program;
         this.yearLevel = yearLevel;
-        this.isRepeatOffender = isRepeatOffender;
+        this.RepeatOffender = RepeatOffender;
         this.createdAt = createdAt;
     }
     public Long getId() {
@@ -71,10 +71,10 @@ public StudentProfile(String studentIdentifier, String name, String email, Strin
     public void setYearLevel(Integer yearLevel) {
         this.yearLevel = yearLevel;
     }
-    public Boolean getIsRepeatOffender() {
+    public Boolean getRepeatOffender() {
         return isRepeatOffender;
     }
-    public void setIsRepeatOffender(Boolean isRepeatOffender) {
+    public void setRepeatOffender(Boolean isRepeatOffender) {
         this.isRepeatOffender = isRepeatOffender;
     }
     public LocalDateTime getCreatedAt() {
