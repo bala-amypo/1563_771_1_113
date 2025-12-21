@@ -74,8 +74,8 @@ public StudentProfile(String studentIdentifier, String name, String email, Strin
     public Boolean getRepeatOffender() {
         return isRepeatOffender;
     }
-    public void setRepeatOffender(Boolean isRepeatOffender) {
-        this.isRepeatOffender = isRepeatOffender;
+    public void setRepeatOffender(Boolean RepeatOffender) {
+        this.RepeatOffender = RepeatOffender;
     }
     public LocalDateTime getCreatedAt() {
         return createdAt;
