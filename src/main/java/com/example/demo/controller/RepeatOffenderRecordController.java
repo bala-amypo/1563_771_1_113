@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.RepeatOffenderRecord;
 import com.example.demo.service.RepeatOffenderRecordService;
 
-// REMOVED: import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +26,6 @@ public class RepeatOffenderRecordController {
         RepeatOffenderRecord saved =
                 repeatOffenderRecordService.createRecord(record);
 
-        // ALTERNATIVE: Using .status(201) to replace HttpStatus.CREATED
         return ResponseEntity.status(201).body(saved);
     }
 

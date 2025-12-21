@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.PenaltyAction;
 import com.example.demo.service.PenaltyActionService;
 
-// REMOVED: import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,6 @@ public class PenaltyActionController {
         PenaltyAction saved =
                 penaltyActionService.createPenaltyAction(penaltyAction);
 
-        // ALTERNATIVE: Using .status(201) instead of HttpStatus.CREATED
         return ResponseEntity.status(201).body(saved);
     }
 
