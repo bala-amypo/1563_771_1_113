@@ -22,7 +22,7 @@ public class StudentProfile {
     private boolean repeatOffender = false;
     private LocalDateTime createdAt;
 
-    public StudentProfile() {} // No-args constructor for JPA
+    public StudentProfile() {} 
 
     public StudentProfile(String studentIdentifier, String name, String email, String program, Integer yearLevel,
                          boolean repeatOffender, LocalDateTime createdAt) {
@@ -53,7 +53,6 @@ public class StudentProfile {
     public Integer getYearLevel() { return yearLevel; }
     public void setYearLevel(Integer yearLevel) { this.yearLevel = yearLevel; }
 
-    // KEY FIX HERE
     public boolean isRepeatOffender() {
         return repeatOffender;
     }
