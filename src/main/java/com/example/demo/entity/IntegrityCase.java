@@ -47,12 +47,10 @@ public class IntegrityCase {
         this.id = id;
     }
 
-    // FIX: Changed return type to String
     public String getStudentIdentifier() {
         return studentIdentifier;
     }
 
-    // FIX: Changed parameter type to String
     public void setStudentIdentifier(String studentIdentifier) {
         this.studentIdentifier = studentIdentifier;
     }
