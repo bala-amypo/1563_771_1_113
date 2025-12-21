@@ -21,11 +21,11 @@ public class StudentProfile {
 
 
     @Column(nullable = false)
-    private boolean isrepeatOffender = false;
+    private boolean isRepeatOffender = false;
     private LocalDateTime createdAt;
-public StudentProfile(String StudentIdentifier, String name, String email, String program, Integer yearLevel,
+public StudentProfile(String studentIdentifier, String name, String email, String program, Integer yearLevel,
             Boolean isRepeatOffender, LocalDateTime createdAt) {
-        this.StudentIdentifier = StudentIdentifier;
+        this.studentIdentifier = studentIdentifier;
         this.name = name;
         this.email = email;
         this.program = program;
