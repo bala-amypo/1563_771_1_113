@@ -30,7 +30,7 @@ public StudentProfile(String studentIdentifier, String name, String email, Strin
         this.email = email;
         this.program = program;
         this.yearLevel = yearLevel;
-        this.RepeatOffender = RepeatOffender;
+        this.repeatOffender = repeatOffender;
         this.createdAt = createdAt;
     }
     public Long getId() {
