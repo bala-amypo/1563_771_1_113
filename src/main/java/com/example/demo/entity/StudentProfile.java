@@ -16,11 +16,14 @@ public class StudentProfile {
 
     private String name;
     private String email;
-    private String department;
+    private String program;
+    private Integer yearLevel;
+
 
     @Column(nullable = false)
     private boolean repeatOffender = false;
-    private 
+    private LocalDateTime createdAt;
+
     public Long getId() {
         return id;
     }
