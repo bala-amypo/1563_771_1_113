@@ -1,7 +1,7 @@
 package com.example.demo.entity;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +13,7 @@ public class IntegrityCase {
     private Long id;
 
     @Column(nullable = false)
-    private String studentIdentifier;
+    private String studentIdentifier; // This is a String
 
     @Column(nullable = false)
     private String status;   
@@ -23,11 +23,13 @@ public class IntegrityCase {
     private LocalDate incidentDate;
     private LocalDateTime createdAt;
 
-   public IntegrityCase() {}
+    public IntegrityCase() {}
 
-    public IntegrityCase(Long id,StudentIdentifier studentIdentifier,String status, String courseCode,
+    // FIX: Changed StudentIdentifier to String in parameters
+    public IntegrityCase(Long id, String studentIdentifier, String status, String courseCode,
                          String instructorName, String description,
-                         LocalDate incidentDate ,LocalDateTime createdAt) {
+                         LocalDate incidentDate, LocalDateTime createdAt) {
+        this.id = id;
         this.studentIdentifier = studentIdentifier;
         this.status = status;
         this.courseCode = courseCode;
@@ -41,11 +43,17 @@ public class IntegrityCase {
         return id;
     }
 
-    public StudentIdentifier getStudentIdentifier() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // FIX: Changed return type to String
+    public String getStudentIdentifier() {
         return studentIdentifier;
     }
 
-    public void setStudentIdentifier(StudentIdentifier studentIdentifier) {
+    // FIX: Changed parameter type to String
+    public void setStudentIdentifier(String studentIdentifier) {
         this.studentIdentifier = studentIdentifier;
     }
 
@@ -91,5 +99,9 @@ public class IntegrityCase {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
