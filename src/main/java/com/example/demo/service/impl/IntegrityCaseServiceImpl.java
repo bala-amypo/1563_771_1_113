@@ -5,12 +5,10 @@ import com.example.demo.repository.IntegrityCaseRepository;
 import com.example.demo.service.IntegrityCaseService;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional  
 public class IntegrityCaseServiceImpl implements IntegrityCaseService {
 
     private final IntegrityCaseRepository repository;
@@ -43,13 +41,11 @@ public class IntegrityCaseServiceImpl implements IntegrityCaseService {
 
     @Override
     public IntegrityCase resolveCase(Long id) {
-
         IntegrityCase c = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Case not found"));
 
-        
         c.setStatus("RESOLVED");
 
-        return c;
+        return repository.save(c);
     }
 }
