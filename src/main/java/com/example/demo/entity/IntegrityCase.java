@@ -41,12 +41,12 @@ public class IntegrityCase {
         return id;
     }
 
-    public StudentstudentIdentifier getStudentIdentifier() {
+    public StudentIdentifier getStudentIdentifier() {
         return studentIdentifier;
     }
 
-    public void setStudentProfile(StudentProfile studentProfile) {
-        this.studentProfile = studentProfile;
+    public void setStudentIdentifier(StudentIdentifier studentIdentifier) {
+        this.studentIdentifier = studentIdentifier;
     }
 
     public String getCourseCode() {
