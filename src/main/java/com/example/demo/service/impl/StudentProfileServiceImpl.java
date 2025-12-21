@@ -5,12 +5,11 @@ import com.example.demo.repository.StudentProfileRepository;
 import com.example.demo.service.StudentProfileService;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+// No Transactional import here
 
 import java.util.List;
 
 @Service
-@Transactional   
 public class StudentProfileServiceImpl implements StudentProfileService {
 
     private final StudentProfileRepository repository;
@@ -21,6 +20,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
     @Override
     public StudentProfile createStudent(StudentProfile studentProfile) {
+        // repository.save() is internally transactional
         return repository.save(studentProfile);
     }
 
@@ -34,8 +34,6 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
     @Override
     public StudentProfile updateRepeatOffenderStatus(Long id) {
-
-        
         StudentProfile student = repository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Student not found with id: " + id)
@@ -43,7 +41,9 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
         student.setRepeatOffender(!student.isRepeatOffender());
 
-        return student;
+        // IMPORTANT: Because we removed @Transactional, we MUST call .save() 
+        // to push changes to the database manually.
+        return repository.save(student);
     }
 
     @Override
