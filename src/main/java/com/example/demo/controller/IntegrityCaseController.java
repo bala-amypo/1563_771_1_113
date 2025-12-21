@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.IntegrityCase;
 import com.example.demo.service.IntegrityCaseService;
 
-import org.springframework.http.HttpStatus;
+// REMOVED: import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +23,9 @@ public class IntegrityCaseController {
     public ResponseEntity<IntegrityCase> createCase(
             @RequestBody IntegrityCase integrityCase) {
 
-        return new ResponseEntity<>(
-                integrityCaseService.createCase(integrityCase),
-                HttpStatus.CREATED
-        );
+        // ALTERNATIVE: Using .status(201) instead of HttpStatus.CREATED
+        return ResponseEntity.status(201)
+                .body(integrityCaseService.createCase(integrityCase));
     }
 
     @GetMapping("/{id}")
