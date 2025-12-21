@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.StudentProfile;
 import com.example.demo.service.StudentProfileService;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +22,8 @@ public class StudentProfileController {
     public ResponseEntity<StudentProfile> createStudent(
             @RequestBody StudentProfile studentProfile) {
 
-        return new ResponseEntity<>(
-                studentProfileService.createStudent(studentProfile),
-                HttpStatus.CREATED
-        );
+        return ResponseEntity.status(201)
+                .body(studentProfileService.createStudent(studentProfile));
     }
 
     @GetMapping("/{id}")
