@@ -1,4 +1,5 @@
 package com.example.demo.entity;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -19,7 +20,7 @@ public class StudentProfile {
 
     @Column(nullable = false)
     private boolean repeatOffender = false;
-
+    private 
     public Long getId() {
         return id;
     }
