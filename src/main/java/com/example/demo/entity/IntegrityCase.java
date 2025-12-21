@@ -1,4 +1,6 @@
 package com.example.demo.entity;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -18,7 +20,8 @@ public class IntegrityCase {
     private String courseCode;
     private String instructorName;
     private String description;
-    private LocalDate ins
+    private LocalDate incidentDate;
+    private LocalDateTime createdAt;
 
    public IntegrityCase() {}
 
