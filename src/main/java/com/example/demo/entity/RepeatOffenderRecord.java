@@ -14,48 +14,57 @@ public class RepeatOffenderRecord {
     private StudentProfile studentProfile;
 
     private Integer totalCases;
-    private LocalDate lastIncidentDate;
+    private LocalDate lastIncidentDate; // Field uses capital 'I'
     private String flagSeverity;
 
-    public RepeatOffenderRecord(){
-
+    public RepeatOffenderRecord() {
     }
-    public RepeatOffenderRecord(StudentProfile studentProfile, Integer totalCases, LocalDate lastincidentDate,
+
+    public RepeatOffenderRecord(StudentProfile studentProfile, Integer totalCases, LocalDate lastIncidentDate,
             String flagSeverity) {
         this.studentProfile = studentProfile;
         this.totalCases = totalCases;
-        this.lastincidentDate = lastincidentDate;
+        this.lastIncidentDate = lastIncidentDate;
         this.flagSeverity = flagSeverity;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public StudentProfile getStudentProfile() {
         return studentProfile;
     }
+
     public void setStudentProfile(StudentProfile studentProfile) {
         this.studentProfile = studentProfile;
     }
+
     public Integer getTotalCases() {
         return totalCases;
     }
+
     public void setTotalCases(Integer totalCases) {
         this.totalCases = totalCases;
     }
-    public LocalDate getLastincidentDate() {
-        return lastincidentDate;
+
+    public LocalDate getLastIncidentDate() {
+        return lastIncidentDate;
     }
-    public void setLastincidentDate(LocalDate lastincidentDate) {
-        this.lastincidentDate = lastincidentDate;
+
+    public void setLastIncidentDate(LocalDate lastIncidentDate) {
+        this.lastIncidentDate = lastIncidentDate;
     }
+
     public String getFlagSeverity() {
         return flagSeverity;
     }
+
     public void setFlagSeverity(String flagSeverity) {
         this.flagSeverity = flagSeverity;
     }
-   
 }
