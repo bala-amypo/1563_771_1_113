@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional   // 🔴 VERY IMPORTANT
+@Transactional  
 public class IntegrityCaseServiceImpl implements IntegrityCaseService {
 
     private final IntegrityCaseRepository repository;
@@ -44,14 +44,12 @@ public class IntegrityCaseServiceImpl implements IntegrityCaseService {
     @Override
     public IntegrityCase resolveCase(Long id) {
 
-        // Managed entity inside transaction
         IntegrityCase c = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Case not found"));
 
         
         c.setStatus("RESOLVED");
 
-        // No save() required — JPA dirty checking updates DB
         return c;
     }
 }

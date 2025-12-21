@@ -11,6 +11,5 @@ public interface EvidenceRecordService {
 
     List<EvidenceRecord> getAllEvidenceRecords();
 
-    // ✅ REQUIRED
     List<EvidenceRecord> getEvidenceRecordsByCaseId(Long caseId);
 }

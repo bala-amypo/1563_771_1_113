@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional   // 🔴 THIS IS CRITICAL
+@Transactional   
 public class StudentProfileServiceImpl implements StudentProfileService {
 
     private final StudentProfileRepository repository;
@@ -35,7 +35,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
     @Override
     public StudentProfile updateRepeatOffenderStatus(Long id) {
 
-        // 🔹 Managed entity inside transaction
+        
         StudentProfile student = repository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Student not found with id: " + id)
@@ -43,7 +43,6 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
         student.setRepeatOffender(!student.isRepeatOffender());
 
-        // 🔹 No need to call save(), JPA auto-dirty-checking will update
         return student;
     }
 

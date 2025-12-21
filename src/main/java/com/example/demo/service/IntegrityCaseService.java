@@ -11,9 +11,7 @@ public interface IntegrityCaseService {
 
     List<IntegrityCase> getAllCases();
 
-    // ✅ REQUIRED BY CONTROLLER
     List<IntegrityCase> getCasesByStudentIdentifier(String studentIdentifier);
 
-    // ✅ REQUIRED BY CONTROLLER
     IntegrityCase resolveCase(Long id);
 }
