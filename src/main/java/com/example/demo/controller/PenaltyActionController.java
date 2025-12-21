@@ -19,7 +19,6 @@ public class PenaltyActionController {
         this.penaltyActionService = penaltyActionService;
     }
 
-    /* ===== CREATE PENALTY ACTION ===== */
     @PostMapping
     public ResponseEntity<PenaltyAction> createPenaltyAction(
             @RequestBody PenaltyAction penaltyAction) {
@@ -30,7 +29,6 @@ public class PenaltyActionController {
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    /* ===== GET PENALTY ACTION BY ID ===== */
     @GetMapping("/{id}")
     public ResponseEntity<PenaltyAction> getPenaltyActionById(
             @PathVariable Long id) {
@@ -40,7 +38,6 @@ public class PenaltyActionController {
         );
     }
 
-    /* ===== GET PENALTY ACTIONS BY CASE ID (✅ REQUIRED) ===== */
     @GetMapping("/case/{caseId}")
     public ResponseEntity<List<PenaltyAction>> getPenaltyActionsByCaseId(
             @PathVariable Long caseId) {
@@ -50,7 +47,6 @@ public class PenaltyActionController {
         );
     }
 
-    /* ===== GET ALL PENALTY ACTIONS ===== */
     @GetMapping
     public ResponseEntity<List<PenaltyAction>> getAllPenaltyActions() {
         return ResponseEntity.ok(

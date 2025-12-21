@@ -19,7 +19,6 @@ public class EvidenceRecordController {
         this.evidenceRecordService = evidenceRecordService;
     }
 
-    /* ===== CREATE EVIDENCE RECORD ===== */
     @PostMapping
     public ResponseEntity<EvidenceRecord> createEvidence(
             @RequestBody EvidenceRecord evidenceRecord) {
@@ -30,7 +29,6 @@ public class EvidenceRecordController {
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    /* ===== GET EVIDENCE BY ID ===== */
     @GetMapping("/{id}")
     public ResponseEntity<EvidenceRecord> getEvidenceById(
             @PathVariable Long id) {
@@ -40,7 +38,6 @@ public class EvidenceRecordController {
         );
     }
 
-    /* ===== GET EVIDENCE BY CASE ID (✅ REQUIRED) ===== */
     @GetMapping("/case/{caseId}")
     public ResponseEntity<List<EvidenceRecord>> getEvidenceByCaseId(
             @PathVariable Long caseId) {
@@ -50,7 +47,6 @@ public class EvidenceRecordController {
         );
     }
 
-    /* ===== GET ALL EVIDENCE RECORDS ===== */
     @GetMapping
     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
         return ResponseEntity.ok(

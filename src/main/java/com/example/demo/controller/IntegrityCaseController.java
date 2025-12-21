@@ -45,12 +45,10 @@ public class IntegrityCaseController {
         );
     }
 
-    // ✅ PUT WITH REQUEST BODY (EDIT SPACE VISIBLE IN SWAGGER)
     @PutMapping("/{id}/resolve")
     public ResponseEntity<IntegrityCase> resolveCase(
             @PathVariable Long id) {
 
-        // RequestBody is ONLY for Swagger UI
         return ResponseEntity.ok(
                 integrityCaseService.resolveCase(id)
         );

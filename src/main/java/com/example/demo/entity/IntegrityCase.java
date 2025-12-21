@@ -14,9 +14,8 @@ public class IntegrityCase {
     private String studentIdentifier;
 
     @Column(nullable = false)
-    private String status;   // ✅ THIS WAS MISSING
+    private String status;   
 
-    // ===== getters & setters =====
 
     public Long getId() {
         return id;
@@ -38,7 +37,7 @@ public class IntegrityCase {
         return status;
     }
 
-    public void setStatus(String status) {   // ✅ REQUIRED
+    public void setStatus(String status) {   
         this.status = status;
     }
 }

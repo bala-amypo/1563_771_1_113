@@ -45,12 +45,10 @@ public class StudentProfileController {
         );
     }
 
-    // ✅ THIS CREATES EDIT SPACE IN SWAGGER
     @PutMapping("/{id}/repeat-offender")
     public ResponseEntity<StudentProfile> markRepeatOffender(
             @PathVariable Long id) {
 
-        // Body is only for Swagger edit space
         return ResponseEntity.ok(
                 studentProfileService.updateRepeatOffenderStatus(id)
         );

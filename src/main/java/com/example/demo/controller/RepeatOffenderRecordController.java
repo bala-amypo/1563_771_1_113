@@ -20,7 +20,6 @@ public class RepeatOffenderRecordController {
         this.repeatOffenderRecordService = repeatOffenderRecordService;
     }
 
-    /* ===== CREATE REPEAT OFFENDER RECORD ===== */
     @PostMapping
     public ResponseEntity<RepeatOffenderRecord> createRecord(
             @RequestBody RepeatOffenderRecord record) {
@@ -31,7 +30,6 @@ public class RepeatOffenderRecordController {
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    /* ===== GET RECORD BY ID ===== */
     @GetMapping("/{id}")
     public ResponseEntity<RepeatOffenderRecord> getRecordById(
             @PathVariable Long id) {
@@ -41,7 +39,6 @@ public class RepeatOffenderRecordController {
         );
     }
 
-    /* ===== GET ALL REPEAT OFFENDERS ===== */
     @GetMapping
     public ResponseEntity<List<RepeatOffenderRecord>> getAllRecords() {
         return ResponseEntity.ok(
