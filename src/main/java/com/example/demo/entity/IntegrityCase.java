@@ -25,23 +25,24 @@ public class IntegrityCase {
 
    public IntegrityCase() {}
 
-    public IntegrityCase(StudentProfile studentProfile, String courseCode,
+    public IntegrityCase(Long id,StudentIdentifier studentIdentifier,String status, String courseCode,
                          String instructorName, String description,
-                         LocalDate incidentDate) {
-        this.studentProfile = studentProfile;
+                         LocalDate incidentDate ,LocalDateTime createdAt) {
+        this.studentIdentifier = studentIdentifier;
+        this.status = status;
         this.courseCode = courseCode;
         this.instructorName = instructorName;
         this.description = description;
         this.incidentDate = incidentDate;
+        this.createdAt = createdAt;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
 
-    public StudentProfile getStudentProfile() {
-        return studentProfile;
+    public StudentstudentIdentifier getStudentIdentifier() {
+        return studentIdentifier;
     }
 
     public void setStudentProfile(StudentProfile studentProfile) {
