@@ -35,23 +35,47 @@ public class StudentProfile {
         this.createdAt = createdAt;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+         return id;
+          }
+    public void setId(Long id) {
+     this.id = id;
+      }
 
-    public String getStudentIdentifier() { return studentIdentifier; }
-    public void setStudentIdentifier(String studentIdentifier) { this.studentIdentifier = studentIdentifier; }
+    public String getStudentIdentifier() { 
+        return studentIdentifier;
+         }
+    public void setStudentIdentifier(String studentIdentifier) { 
+        this.studentIdentifier = studentIdentifier; 
+        }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getName() { 
+        return name;
+         }
+    public void setName(String name) {
+     this.name = name; 
+     }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getEmail() { 
+        return email;
+         }
+    public void setEmail(String email) {
+         this.email = email;
+          }
 
-    public String getProgram() { return program; }
-    public void setProgram(String program) { this.program = program; }
+    public String getProgram() {
+         return program;
+          }
+    public void setProgram(String program) { 
+    this.program = program; 
+    }
 
-    public Integer getYearLevel() { return yearLevel; }
-    public void setYearLevel(Integer yearLevel) { this.yearLevel = yearLevel; }
+    public Integer getYearLevel() {
+     return yearLevel;
+      }
+    public void setYearLevel(Integer yearLevel) { 
+        this.yearLevel = yearLevel;
+         }
 
     public boolean isRepeatOffender() {
         return repeatOffender;
