@@ -13,7 +13,7 @@ public class IntegrityCase {
     private Long id;
 
     @Column(nullable = false)
-    private String studentIdentifier; 
+    private String studentIdentifier; // This is a String
 
     @Column(nullable = false)
     private String status;   
@@ -25,7 +25,7 @@ public class IntegrityCase {
 
     public IntegrityCase() {}
 
-    public IntegrityCase(, String studentIdentifier, String status, String courseCode,
+    public IntegrityCase( String studentIdentifier, String status, String courseCode,
                          String instructorName, String description,
                          LocalDate incidentDate, LocalDateTime createdAt) {
         this.studentIdentifier = studentIdentifier;
