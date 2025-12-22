@@ -13,7 +13,7 @@ public class IntegrityCase {
     private Long id;
 
     @Column(nullable = false)
-    private String studentIdentifier; // This is a String
+    private String studentIdentifier; 
 
     @Column(nullable = false)
     private String status;   
@@ -25,11 +25,9 @@ public class IntegrityCase {
 
     public IntegrityCase() {}
 
-    // FIX: Changed StudentIdentifier to String in parameters
-    public IntegrityCase(Long id, String studentIdentifier, String status, String courseCode,
+    public IntegrityCase(, String studentIdentifier, String status, String courseCode,
                          String instructorName, String description,
                          LocalDate incidentDate, LocalDateTime createdAt) {
-        this.id = id;
         this.studentIdentifier = studentIdentifier;
         this.status = status;
         this.courseCode = courseCode;
