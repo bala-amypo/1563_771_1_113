@@ -22,7 +22,7 @@ public class PenaltyAction {
     void onCreate() {
         issuedAt = LocalDateTime.now();
     }
-
+     public PenaltyAction(){}
      public PenaltyAction(IntegrityCase integrityCase, String penaltyType, String details, String issuedBy,
             LocalDateTime issuedAt) {
         this.integrityCase = integrityCase;

@@ -22,7 +22,7 @@ public class EvidenceRecord {
     void onCreate() {
         submittedAt = LocalDateTime.now();
     }
-
+    public EvidenceRecord(){}
     public EvidenceRecord(IntegrityCase integrityCase, String evidenceType, String content, String submittedBy,
             LocalDateTime submittedAt) {
         this.integrityCase = integrityCase;
