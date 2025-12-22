@@ -5,7 +5,6 @@ import com.example.demo.repository.StudentProfileRepository;
 import com.example.demo.service.StudentProfileService;
 
 import org.springframework.stereotype.Service;
-// No Transactional import here
 
 import java.util.List;
 
@@ -20,7 +19,6 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
     @Override
     public StudentProfile createStudent(StudentProfile studentProfile) {
-        // repository.save() is internally transactional
         return repository.save(studentProfile);
     }
 
@@ -41,8 +39,6 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
         student.setRepeatOffender(!student.isRepeatOffender());
 
-        // IMPORTANT: Because we removed @Transactional, we MUST call .save() 
-        // to push changes to the database manually.
         return repository.save(student);
     }
 
