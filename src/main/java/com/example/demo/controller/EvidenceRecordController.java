@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.EvidenceRecord;
 import com.example.demo.service.EvidenceRecordService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class EvidenceRecordController {
         this.evidenceRecordService = evidenceRecordService;
     }
 
+    /* ===== CREATE EVIDENCE RECORD ===== */
     @PostMapping
     public ResponseEntity<EvidenceRecord> createEvidence(
             @RequestBody EvidenceRecord evidenceRecord) {
@@ -25,9 +27,10 @@ public class EvidenceRecordController {
         EvidenceRecord saved =
                 evidenceRecordService.createEvidenceRecord(evidenceRecord);
 
-        return ResponseEntity.status(201).body(saved);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
+    /* ===== GET EVIDENCE BY ID ===== */
     @GetMapping("/{id}")
     public ResponseEntity<EvidenceRecord> getEvidenceById(
             @PathVariable Long id) {
@@ -37,6 +40,7 @@ public class EvidenceRecordController {
         );
     }
 
+    /* ===== GET EVIDENCE BY CASE ID ===== */
     @GetMapping("/case/{caseId}")
     public ResponseEntity<List<EvidenceRecord>> getEvidenceByCaseId(
             @PathVariable Long caseId) {
@@ -46,6 +50,7 @@ public class EvidenceRecordController {
         );
     }
 
+    /* ===== GET ALL EVIDENCE ===== */
     @GetMapping
     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
         return ResponseEntity.ok(

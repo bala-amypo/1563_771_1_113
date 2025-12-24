@@ -26,8 +26,7 @@ public class EvidenceRecordServiceImpl implements EvidenceRecordService {
     public EvidenceRecord getEvidenceRecordById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Evidence not found with id: " + id)
-                );
+                        new RuntimeException("Evidence not found with id: " + id));
     }
 
     @Override
