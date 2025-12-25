@@ -70,4 +70,9 @@ public class StudentProfile {
     }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
+
+public void setCreatedAt(LocalDateTime time) {
+    this.createdAt = time;
 }
+}
+

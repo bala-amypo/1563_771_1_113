@@ -79,4 +79,8 @@ public class EvidenceRecord {
     public LocalDateTime getSubmittedAt() {
         return submittedAt;
     }
+    public void setSubmittedAt(LocalDateTime time) {
+    this.submittedAt = time;
+}
+
 }

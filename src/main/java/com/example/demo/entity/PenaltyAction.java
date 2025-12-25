@@ -72,4 +72,8 @@ public class PenaltyAction {
     public LocalDateTime getIssuedAt() {
         return issuedAt;
     }
+    public void setIssuedAt(LocalDateTime time) {
+    this.issuedAt = time;
+}
+
 }
