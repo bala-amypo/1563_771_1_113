@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.PenaltyAction;
 import com.example.demo.service.PenaltyActionService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,44 +13,48 @@ import java.util.List;
 @RequestMapping("/api/penalty-actions")
 public class PenaltyActionController {
 
-    private final PenaltyActionService penaltyActionService;
+    private final PenaltyActionService service;
 
-    public PenaltyActionController(PenaltyActionService penaltyActionService) {
-        this.penaltyActionService = penaltyActionService;
+    public PenaltyActionController(PenaltyActionService service) {
+        this.service = service;
     }
 
+    /* ===== ADD PENALTY ===== */
     @PostMapping
-    public ResponseEntity<PenaltyAction> createPenaltyAction(
+    public ResponseEntity<PenaltyAction> addPenalty(
             @RequestBody PenaltyAction penaltyAction) {
 
-        PenaltyAction saved =
-                penaltyActionService.createPenaltyAction(penaltyAction);
-
-        return ResponseEntity.status(201).body(saved);
+        return new ResponseEntity<>(
+                service.addPenalty(penaltyAction),
+                HttpStatus.CREATED
+        );
     }
 
+    /* ===== GET BY ID ===== */
     @GetMapping("/{id}")
-    public ResponseEntity<PenaltyAction> getPenaltyActionById(
+    public ResponseEntity<PenaltyAction> getById(
             @PathVariable Long id) {
 
         return ResponseEntity.ok(
-                penaltyActionService.getPenaltyActionById(id)
+                service.getPenaltyById(id)
         );
     }
 
+    /* ===== GET BY CASE ===== */
     @GetMapping("/case/{caseId}")
-    public ResponseEntity<List<PenaltyAction>> getPenaltyActionsByCaseId(
+    public ResponseEntity<List<PenaltyAction>> getByCase(
             @PathVariable Long caseId) {
 
         return ResponseEntity.ok(
-                penaltyActionService.getPenaltyActionsByCaseId(caseId)
+                service.getPenaltiesByCase(caseId)
         );
     }
 
+    /* ===== GET ALL ===== */
     @GetMapping
-    public ResponseEntity<List<PenaltyAction>> getAllPenaltyActions() {
+    public ResponseEntity<List<PenaltyAction>> getAll() {
         return ResponseEntity.ok(
-                penaltyActionService.getAllPenaltyActions()
+                service.getAllPenalties()
         );
     }
 }
