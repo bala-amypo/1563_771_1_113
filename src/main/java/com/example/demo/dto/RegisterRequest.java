@@ -1,6 +1,18 @@
 package com.example.demo.dto;
 
 public class RegisterRequest {
-    public String username;
-    public String password;
+    private String email;
+    private String password;
+    private String fullName;
+    private String role;
+
+    public void setEmail(String email) { this.email = email; }
+    public void setPassword(String password) { this.password = password; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setRole(String role) { this.role = role; }
+
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public String getFullName() { return fullName; }
+    public String getRole() { return role; }
 }
