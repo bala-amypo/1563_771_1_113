@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "penalty_actions")
 public class PenaltyAction {
 
     @Id
@@ -11,62 +12,64 @@ public class PenaltyAction {
     private Long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "integrity_case_id")
     private IntegrityCase integrityCase;
 
     private String penaltyType;
     private String details;
     private String issuedBy;
+
+    @Column(nullable = false)
     private LocalDateTime issuedAt;
 
     @PrePersist
     void onCreate() {
         issuedAt = LocalDateTime.now();
     }
-     public PenaltyAction(){}
-     public PenaltyAction(IntegrityCase integrityCase, String penaltyType, String details, String issuedBy,
-            LocalDateTime issuedAt) {
-        this.integrityCase = integrityCase;
-        this.penaltyType = penaltyType;
-        this.details = details;
-        this.issuedBy = issuedBy;
-        this.issuedAt = issuedAt;
-    }
+
+    /* ===== GETTERS & SETTERS ===== */
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public IntegrityCase getIntegrityCase() {
         return integrityCase;
     }
+
     public void setIntegrityCase(IntegrityCase integrityCase) {
         this.integrityCase = integrityCase;
     }
+
     public String getPenaltyType() {
         return penaltyType;
     }
+
     public void setPenaltyType(String penaltyType) {
         this.penaltyType = penaltyType;
     }
+
     public String getDetails() {
         return details;
     }
+
     public void setDetails(String details) {
         this.details = details;
     }
+
     public String getIssuedBy() {
         return issuedBy;
     }
+
     public void setIssuedBy(String issuedBy) {
         this.issuedBy = issuedBy;
     }
+
     public LocalDateTime getIssuedAt() {
         return issuedAt;
     }
-    public void setIssuedAt(LocalDateTime issuedAt) {
-        this.issuedAt = issuedAt;
-    }
-    
-    
 }

@@ -6,42 +6,34 @@ import com.example.demo.service.RepeatOffenderRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/repeat-offenders")
 public class RepeatOffenderRecordController {
 
-    private final RepeatOffenderRecordService repeatOffenderRecordService;
+    private final RepeatOffenderRecordService service;
 
     public RepeatOffenderRecordController(
-            RepeatOffenderRecordService repeatOffenderRecordService) {
-        this.repeatOffenderRecordService = repeatOffenderRecordService;
+            RepeatOffenderRecordService service) {
+        this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<RepeatOffenderRecord> createRecord(
-            @RequestBody RepeatOffenderRecord record) {
-
-        RepeatOffenderRecord saved =
-                repeatOffenderRecordService.createRecord(record);
-
-        return ResponseEntity.status(201).body(saved);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<RepeatOffenderRecord> getRecordById(
-            @PathVariable Long id) {
+    /* ===== RECALCULATE STATUS ===== */
+    @PostMapping("/refresh/{studentId}")
+    public ResponseEntity<RepeatOffenderRecord> recalculate(
+            @PathVariable Long studentId) {
 
         return ResponseEntity.ok(
-                repeatOffenderRecordService.getRecordById(id)
+                service.recalculateForStudent(studentId)
         );
     }
 
-    @GetMapping
-    public ResponseEntity<List<RepeatOffenderRecord>> getAllRecords() {
+    /* ===== GET BY STUDENT ===== */
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<RepeatOffenderRecord> getByStudent(
+            @PathVariable Long studentId) {
+
         return ResponseEntity.ok(
-                repeatOffenderRecordService.getAllRecords()
+                service.getRecordByStudent(studentId)
         );
     }
 }
