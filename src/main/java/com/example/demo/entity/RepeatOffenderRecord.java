@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "repeat_offender_records")
 public class RepeatOffenderRecord {
 
     @Id
@@ -11,22 +12,16 @@ public class RepeatOffenderRecord {
     private Long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "student_profile_id")
     private StudentProfile studentProfile;
 
     private Integer totalCases;
-    private LocalDate lastIncidentDate; // Field uses capital 'I'
+
+    private LocalDate firstIncidentDate;
+
     private String flagSeverity;
 
-    public RepeatOffenderRecord() {
-    }
-
-    public RepeatOffenderRecord(StudentProfile studentProfile, Integer totalCases, LocalDate lastIncidentDate,
-            String flagSeverity) {
-        this.studentProfile = studentProfile;
-        this.totalCases = totalCases;
-        this.lastIncidentDate = lastIncidentDate;
-        this.flagSeverity = flagSeverity;
-    }
+    /* ===== GETTERS & SETTERS ===== */
 
     public Long getId() {
         return id;
@@ -52,12 +47,12 @@ public class RepeatOffenderRecord {
         this.totalCases = totalCases;
     }
 
-    public LocalDate getLastIncidentDate() {
-        return lastIncidentDate;
+    public LocalDate getFirstIncidentDate() {
+        return firstIncidentDate;
     }
 
-    public void setLastIncidentDate(LocalDate lastIncidentDate) {
-        this.lastIncidentDate = lastIncidentDate;
+    public void setFirstIncidentDate(LocalDate firstIncidentDate) {
+        this.firstIncidentDate = firstIncidentDate;
     }
 
     public String getFlagSeverity() {
