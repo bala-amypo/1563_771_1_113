@@ -1,41 +1,49 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "integrity_case")
+@Table(name = "integrity_cases")
 public class IntegrityCase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String studentIdentifier; // This is a String
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "student_profile_id")
+    private StudentProfile studentProfile;
 
-    @Column(nullable = false)
-    private String status;   
     private String courseCode;
     private String instructorName;
+
+    @Column(length = 1000)
     private String description;
+
+    private String status;
+
     private LocalDate incidentDate;
+
     private LocalDateTime createdAt;
 
-    public IntegrityCase() {}
+    @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
+    private List<EvidenceRecord> evidenceRecords;
 
-    public IntegrityCase( String studentIdentifier, String status, String courseCode,
-                         String instructorName, String description,
-                         LocalDate incidentDate, LocalDateTime createdAt) {
-        this.studentIdentifier = studentIdentifier;
-        this.status = status;
-        this.courseCode = courseCode;
-        this.instructorName = instructorName;
-        this.description = description;
-        this.incidentDate = incidentDate;
-        this.createdAt = createdAt;
+    @OneToMany(mappedBy = "integrityCase", cascade = CascadeType.ALL)
+    private List<PenaltyAction> penaltyActions;
+
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        if (this.status == null) {
+            this.status = "OPEN";
+        }
     }
+
+    /* ===== GETTERS & SETTERS ===== */
 
     public Long getId() {
         return id;
@@ -45,12 +53,12 @@ public class IntegrityCase {
         this.id = id;
     }
 
-    public String getStudentIdentifier() {
-        return studentIdentifier;
+    public StudentProfile getStudentProfile() {
+        return studentProfile;
     }
 
-    public void setStudentIdentifier(String studentIdentifier) {
-        this.studentIdentifier = studentIdentifier;
+    public void setStudentProfile(StudentProfile studentProfile) {
+        this.studentProfile = studentProfile;
     }
 
     public String getCourseCode() {
@@ -95,9 +103,5 @@ public class IntegrityCase {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }
