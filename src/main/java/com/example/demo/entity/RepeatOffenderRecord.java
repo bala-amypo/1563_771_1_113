@@ -1,11 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 
 @Entity
 public class RepeatOffenderRecord {
@@ -14,22 +9,32 @@ public class RepeatOffenderRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "student_id")
+    // Student linked to this record
+    @ManyToOne
+    @JoinColumn(name = "student_profile_id")
     private StudentProfile studentProfile;
 
-    // ✅ REQUIRED by calculator & services
+    // REQUIRED by calculator & services
     private boolean repeatOffender;
-
-    private int totalCases;
 
     private String flagSeverity;
 
-    // ✅ Default constructor (MANDATORY)
+    private int totalCases;
+
+    /* =======================
+       Constructors
+       ======================= */
+
     public RepeatOffenderRecord() {
     }
 
-    // ---------------- GETTERS & SETTERS ----------------
+    public RepeatOffenderRecord(StudentProfile studentProfile) {
+        this.studentProfile = studentProfile;
+    }
+
+    /* =======================
+       Getters and Setters
+       ======================= */
 
     public Long getId() {
         return id;
@@ -47,8 +52,6 @@ public class RepeatOffenderRecord {
         this.studentProfile = studentProfile;
     }
 
-    // 🔥 USED HERE:
-    // record.setRepeatOffender(...)
     public boolean isRepeatOffender() {
         return repeatOffender;
     }
@@ -57,24 +60,19 @@ public class RepeatOffenderRecord {
         this.repeatOffender = repeatOffender;
     }
 
-    // 🔥 USED HERE:
-    // record.setTotalCases(...)
-    // record.getTotalCases()
-    public int getTotalCases() {
-        return totalCases;
-    }
-
-    public void setTotalCases(int totalCases) {
-        this.totalCases = totalCases;
-    }
-
-    // 🔥 USED HERE:
-    // record.setFlagSeverity(...)
     public String getFlagSeverity() {
         return flagSeverity;
     }
 
     public void setFlagSeverity(String flagSeverity) {
         this.flagSeverity = flagSeverity;
+    }
+
+    public int getTotalCases() {
+        return totalCases;
+    }
+
+    public void setTotalCases(int totalCases) {
+        this.totalCases = totalCases;
     }
 }
