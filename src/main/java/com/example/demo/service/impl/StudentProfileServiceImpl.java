@@ -51,7 +51,6 @@ public class StudentProfileServiceImpl implements StudentProfileService {
         
         recordRepo.save(record);
         
-        // Logic implied by tests 14, 15, 49: if cases >= 2 -> true
         s.setRepeatOffender(record.getTotalCases() >= 2);
         return repo.save(s);
     }

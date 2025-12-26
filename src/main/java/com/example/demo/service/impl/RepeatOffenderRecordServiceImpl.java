@@ -9,6 +9,5 @@ import org.springframework.stereotype.Service;
 public class RepeatOffenderRecordServiceImpl implements RepeatOffenderRecordService {
     public RepeatOffenderRecordServiceImpl(StudentProfileRepository spr, IntegrityCaseRepository icr,
                                            RepeatOffenderRecordRepository rorr, RepeatOffenderCalculator roc) {
-        // Constructor matching test instantiation
     }
 }

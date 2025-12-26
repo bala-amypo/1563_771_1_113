@@ -18,7 +18,6 @@ public class EvidenceRecordServiceImpl implements EvidenceRecordService {
 
     @Override
     public EvidenceRecord submitEvidence(EvidenceRecord e) {
-        // Ensure case exists
         caseRepo.findById(e.getIntegrityCase().getId());
         return repo.save(e);
     }
