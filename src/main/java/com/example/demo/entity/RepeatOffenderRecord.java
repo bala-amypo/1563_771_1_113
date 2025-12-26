@@ -1,6 +1,11 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 public class RepeatOffenderRecord {
@@ -10,18 +15,21 @@ public class RepeatOffenderRecord {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "student_profile_id")
+    @JoinColumn(name = "student_id")
     private StudentProfile studentProfile;
 
+    // ✅ REQUIRED by calculator & services
     private boolean repeatOffender;
+
+    private int totalCases;
 
     private String flagSeverity;
 
-    // ✅ Default constructor (REQUIRED)
+    // ✅ Default constructor (MANDATORY)
     public RepeatOffenderRecord() {
     }
 
-    // -------- Getters & Setters --------
+    // ---------------- GETTERS & SETTERS ----------------
 
     public Long getId() {
         return id;
@@ -39,20 +47,33 @@ public class RepeatOffenderRecord {
         this.studentProfile = studentProfile;
     }
 
+    // 🔥 USED HERE:
+    // record.setRepeatOffender(...)
     public boolean isRepeatOffender() {
         return repeatOffender;
     }
 
-    // ✅ REQUIRED by RepeatOffenderRecordServiceImpl
     public void setRepeatOffender(boolean repeatOffender) {
         this.repeatOffender = repeatOffender;
     }
 
+    // 🔥 USED HERE:
+    // record.setTotalCases(...)
+    // record.getTotalCases()
+    public int getTotalCases() {
+        return totalCases;
+    }
+
+    public void setTotalCases(int totalCases) {
+        this.totalCases = totalCases;
+    }
+
+    // 🔥 USED HERE:
+    // record.setFlagSeverity(...)
     public String getFlagSeverity() {
         return flagSeverity;
     }
 
-    // ✅ REQUIRED by RepeatOffenderCalculator
     public void setFlagSeverity(String flagSeverity) {
         this.flagSeverity = flagSeverity;
     }
