@@ -1,54 +1,43 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "repeat_offender_records")
 public class RepeatOffenderRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 🔗 Relation with StudentProfile
+    // Relationship with StudentProfile
     @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
     private StudentProfile studentProfile;
 
-    // 🔢 Total integrity cases
+    @Column(nullable = false)
     private int totalCases;
 
-    // 🔁 Repeat offender flag
+    @Column(nullable = false)
     private boolean repeatOffender;
 
-    // ⚠ Severity level
+    @Column(length = 50)
     private String flagSeverity;
 
-    // ✅ Active status
-    private boolean active;
+    // ---------------- Constructors ----------------
 
-    // ================= CONSTRUCTORS =================
-
-    // Required by JPA
     public RepeatOffenderRecord() {
     }
 
-    // Useful constructor
-    public RepeatOffenderRecord(StudentProfile studentProfile,
-                                int totalCases,
-                                boolean repeatOffender,
-                                String flagSeverity,
-                                boolean active) {
+    public RepeatOffenderRecord(StudentProfile studentProfile, int totalCases,
+                                boolean repeatOffender, String flagSeverity) {
         this.studentProfile = studentProfile;
         this.totalCases = totalCases;
         this.repeatOffender = repeatOffender;
         this.flagSeverity = flagSeverity;
-        this.active = active;
     }
 
-    // ================= GETTERS & SETTERS =================
+    // ---------------- Getters & Setters ----------------
 
     public Long getId() {
         return id;
@@ -66,7 +55,6 @@ public class RepeatOffenderRecord {
         this.studentProfile = studentProfile;
     }
 
-    // 🔹 totalCases
     public int getTotalCases() {
         return totalCases;
     }
@@ -75,7 +63,6 @@ public class RepeatOffenderRecord {
         this.totalCases = totalCases;
     }
 
-    // 🔹 repeatOffender
     public boolean isRepeatOffender() {
         return repeatOffender;
     }
@@ -84,7 +71,6 @@ public class RepeatOffenderRecord {
         this.repeatOffender = repeatOffender;
     }
 
-    // 🔹 flagSeverity
     public String getFlagSeverity() {
         return flagSeverity;
     }
@@ -92,11 +78,4 @@ public class RepeatOffenderRecord {
     public void setFlagSeverity(String flagSeverity) {
         this.flagSeverity = flagSeverity;
     }
-
-    // 🔹 active
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.
+}
