@@ -6,6 +6,28 @@ import com.example.demo.service.EvidenceRecordService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
+public class EvidenceRecordServiceImpl implements EvidenceRecordService {
+
+    private final EvidenceRecordRepository evidenceRecordRepository;
+    private IntegrityCaseRepository integrityCaseRepository;
+
+    // ✅ Constructor REQUIRED by test cases
+    public EvidenceRecordServiceImpl(EvidenceRecordRepository evidenceRecordRepository) {
+        this.evidenceRecordRepository = evidenceRecordRepository;
+    }
+
+    // ✅ Constructor used by Spring at runtime
+    @Autowired
+    public EvidenceRecordServiceImpl(
+            EvidenceRecordRepository evidenceRecordRepository,
+            IntegrityCaseRepository integrityCaseRepository) {
+        this.evidenceRecordRepository = evidenceRecordRepository;
+        this.integrityCaseRepository = integrityCaseRepository;
+    }
+
+    // service methods here
+}
 
 @Service
 public class EvidenceRecordServiceImpl implements EvidenceRecordService {
