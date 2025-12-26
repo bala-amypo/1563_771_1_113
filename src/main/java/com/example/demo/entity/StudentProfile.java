@@ -17,7 +17,6 @@ public class StudentProfile {
     private String program;
     private Integer yearLevel;
     
-    // Fix: Init immediately
     private Boolean repeatOffender = false;
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -30,7 +29,6 @@ public class StudentProfile {
         if (this.repeatOffender == null) this.repeatOffender = false;
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getStudentId() { return studentId; }

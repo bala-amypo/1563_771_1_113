@@ -17,7 +17,6 @@ public class EvidenceRecord {
     private String content;
     private String submittedBy;
     
-    // Fix: Init immediately
     private LocalDateTime submittedAt = LocalDateTime.now();
 
     @PrePersist
@@ -25,7 +24,6 @@ public class EvidenceRecord {
         if (this.submittedAt == null) this.submittedAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public IntegrityCase getIntegrityCase() { return integrityCase; }
