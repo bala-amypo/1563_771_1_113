@@ -1,24 +1,19 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.IntegrityCase;
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.entity.StudentProfile;
+import java.time.LocalDate;
 import java.util.List;
 
-// public interface IntegrityCaseRepository
-//         extends JpaRepository<IntegrityCase, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-//     List<IntegrityCase> findByStudentProfile_Id(Long studentId);
+import com.example.demo.entity.IntegrityCase;
 
-//     List<IntegrityCase> findByStatus(String status);
-//     List<IntegrityCase> findByStudentProfile(StudentProfile studentProfile);
+@Repository
 public interface IntegrityCaseRepository extends JpaRepository<IntegrityCase, Long> {
 
     List<IntegrityCase> findByStudentIdentifier(String studentIdentifier);
 
     List<IntegrityCase> findRecentCasesByStatus(String status, LocalDate date);
 
-    List<IntegrityCase> findByIncidentDateBetween(LocalDate start, LocalDate end);
-}
-
+    List<IntegrityCase> findByIncidentDateBetween(LocalDate startDate, LocalDate endDate);
 }
