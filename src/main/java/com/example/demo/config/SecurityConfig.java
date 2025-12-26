@@ -30,27 +30,27 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 }
 
 
-    // ✅ PasswordEncoder bean
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//     // ✅ PasswordEncoder bean
+//     @Bean
+//     public PasswordEncoder passwordEncoder() {
+//         return new BCryptPasswordEncoder();
+//     }
 
-    // ✅ AuthenticationManager bean (THIS FIXES YOUR ERROR)
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
+//     // ✅ AuthenticationManager bean (THIS FIXES YOUR ERROR)
+//     @Bean
+//     public AuthenticationManager authenticationManager(
+//             AuthenticationConfiguration config) throws Exception {
+//         return config.getAuthenticationManager();
+//     }
 
-    // ✅ SecurityFilterChain bean
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()
-            );
-        return http.build();
-    }
-}
+//     // ✅ SecurityFilterChain bean
+//     @Bean
+//     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//         http
+//             .csrf(csrf -> csrf.disable())
+//             .authorizeHttpRequests(auth -> auth
+//                 .anyRequest().permitAll()
+//             );
+//         return http.build();
+//     }
+// }
