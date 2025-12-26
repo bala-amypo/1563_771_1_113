@@ -10,17 +10,19 @@ public class RepeatOffenderRecord {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "student_profile_id")
     private StudentProfile studentProfile;
 
-    private Boolean repeatOffender;
+    private boolean repeatOffender;
 
-    private Integer totalCases;
+    private String flagSeverity;
 
-    // ✅ REQUIRED: Default constructor
+    // ✅ Default constructor (REQUIRED)
     public RepeatOffenderRecord() {
     }
 
-    // ✅ Getter & Setter (IMPORTANT)
+    // -------- Getters & Setters --------
+
     public Long getId() {
         return id;
     }
@@ -37,20 +39,21 @@ public class RepeatOffenderRecord {
         this.studentProfile = studentProfile;
     }
 
-    // 🔥 THIS FIXES YOUR ERROR
-    public Boolean getRepeatOffender() {
+    public boolean isRepeatOffender() {
         return repeatOffender;
     }
 
-    public void setRepeatOffender(Boolean repeatOffender) {
+    // ✅ REQUIRED by RepeatOffenderRecordServiceImpl
+    public void setRepeatOffender(boolean repeatOffender) {
         this.repeatOffender = repeatOffender;
     }
 
-    public Integer getTotalCases() {
-        return totalCases;
+    public String getFlagSeverity() {
+        return flagSeverity;
     }
 
-    public void setTotalCases(Integer totalCases) {
-        this.totalCases = totalCases;
+    // ✅ REQUIRED by RepeatOffenderCalculator
+    public void setFlagSeverity(String flagSeverity) {
+        this.flagSeverity = flagSeverity;
     }
 }
