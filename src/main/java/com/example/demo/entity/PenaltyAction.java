@@ -1,5 +1,3 @@
-Penalty:
-
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
@@ -8,39 +6,36 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "penalty_actions")
 public class PenaltyAction {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "integrity_case_id", nullable = false)
-private IntegrityCase integrityCase;
+    @ManyToOne
+    private IntegrityCase integrityCase;
 
-@Column(nullable = false)
-private String penaltyType;
+    private String penaltyType;
+    private String details;
+    private String issuedBy;
+    
+    // Fix: Init immediately
+    private LocalDateTime issuedAt = LocalDateTime.now();
 
-@Column(columnDefinition = "TEXT")
-private String details;
+    @PrePersist
+    public void onCreate() {
+        if (this.issuedAt == null) this.issuedAt = LocalDateTime.now();
+    }
 
-@Column(nullable = false)
-private String issuedBy;
-
-@Column(nullable = false)
-private LocalDateTime issuedAt = LocalDateTime.now();
-
-// Constructors, Getters, Setters
-public PenaltyAction() {}
-
-public Long getId() { return id; }
-public void setId(Long id) { this.id = id; }
-public IntegrityCase getIntegrityCase() { return integrityCase; }
-public void setIntegrityCase(IntegrityCase integrityCase) { this.integrityCase = integrityCase; }
-public String getPenaltyType() { return penaltyType; }
-public void setPenaltyType(String penaltyType) { this.penaltyType = penaltyType; }
-public String getDetails() { return details; }
-public void setDetails(String details) { this.details = details; }
-public String getIssuedBy() { return issuedBy; }
-public void setIssuedBy(String issuedBy) { this.issuedBy = issuedBy; }
-public LocalDateTime getIssuedAt() { return issuedAt; }
-public void setIssuedAt(LocalDateTime issuedAt) { this.issuedAt = issuedAt; }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public IntegrityCase getIntegrityCase() { return integrityCase; }
+    public void setIntegrityCase(IntegrityCase integrityCase) { this.integrityCase = integrityCase; }
+    public String getPenaltyType() { return penaltyType; }
+    public void setPenaltyType(String penaltyType) { this.penaltyType = penaltyType; }
+    public String getDetails() { return details; }
+    public void setDetails(String details) { this.details = details; }
+    public String getIssuedBy() { return issuedBy; }
+    public void setIssuedBy(String issuedBy) { this.issuedBy = issuedBy; }
+    public LocalDateTime getIssuedAt() { return issuedAt; }
+    public void setIssuedAt(LocalDateTime issuedAt) { this.issuedAt = issuedAt; }
 }

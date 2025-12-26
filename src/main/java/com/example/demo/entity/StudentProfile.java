@@ -1,65 +1,31 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "student_profiles")
-public class StudentProfile {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+@Table(name = "repeat_offender_records")
+public class RepeatOffenderRecord {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@Column(unique = true, nullable = false)
-private String studentId;
+    @ManyToOne
+    private StudentProfile studentProfile;
 
-@Column(nullable = false)
-private String name;
+    private Integer totalCases;
+    private LocalDate firstIncidentDate;
+    private String flagSeverity;
 
-@Column(unique = true, nullable = false)
-private String email;
-
-@Column(nullable = false)
-private String program;
-
-@Column(nullable = false)
-private Integer yearLevel;
-
-private boolean repeatOffender = false;
-
-@Column(nullable = false, updatable = false)
-private LocalDateTime createdAt = LocalDateTime.now();
-
-@OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-private List<IntegrityCase> integrityCases = new ArrayList<>();
-
-@OneToOne(mappedBy = "studentProfile", cascade = CascadeType.ALL)
-private RepeatOffenderRecord repeatOffenderRecord;
-
-// Constructors, Getters, Setters
-public StudentProfile() {}
-
-public Long getId() { return id; }
-public void setId(Long id) { this.id = id; }
-public String getStudentId() { return studentId; }
-public void setStudentId(String studentId) { this.studentId = studentId; }
-public String getName() { return name; }
-public void setName(String name) { this.name = name; }
-public String getEmail() { return email; }
-public void setEmail(String email) { this.email = email; }
-public String getProgram() { return program; }
-public void setProgram(String program) { this.program = program; }
-public Integer getYearLevel() { return yearLevel; }
-public void setYearLevel(Integer yearLevel) { this.yearLevel = yearLevel; }
-public boolean getRepeatOffender() { return repeatOffender; }
-public void setRepeatOffender(boolean repeatOffender) { this.repeatOffender = repeatOffender; }
-public LocalDateTime getCreatedAt() { return createdAt; }
-public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-public List<IntegrityCase> getIntegrityCases() { return integrityCases; }
-public void setIntegrityCases(List<IntegrityCase> integrityCases) { this.integrityCases = integrityCases; }
-public RepeatOffenderRecord getRepeatOffenderRecord() { return repeatOffenderRecord; }
-public void setRepeatOffenderRecord(RepeatOffenderRecord repeatOffenderRecord) { this.repeatOffenderRecord = repeatOffenderRecord; }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public StudentProfile getStudentProfile() { return studentProfile; }
+    public void setStudentProfile(StudentProfile studentProfile) { this.studentProfile = studentProfile; }
+    public Integer getTotalCases() { return totalCases; }
+    public void setTotalCases(Integer totalCases) { this.totalCases = totalCases; }
+    public LocalDate getFirstIncidentDate() { return firstIncidentDate; }
+    public void setFirstIncidentDate(LocalDate firstIncidentDate) { this.firstIncidentDate = firstIncidentDate; }
+    public String getFlagSeverity() { return flagSeverity; }
+    public void setFlagSeverity(String flagSeverity) { this.flagSeverity = flagSeverity; }
 }
-

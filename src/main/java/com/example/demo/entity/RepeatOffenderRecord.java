@@ -1,34 +1,31 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "repeat_offender_records")
 public class RepeatOffenderRecord {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@OneToOne
-@JoinColumn(name = "student_profile_id", nullable = false)
-private StudentProfile studentProfile;
+    @ManyToOne
+    private StudentProfile studentProfile;
 
-@Column(nullable = false)
-private Integer totalCases;
+    private Integer totalCases;
+    private LocalDate firstIncidentDate;
+    private String flagSeverity;
 
-@Column(nullable = false)
-private String flagSeverity;
-
-// Constructors, Getters, Setters
-public RepeatOffenderRecord() {}
-
-public Long getId() { return id; }
-public void setId(Long id) { this.id = id; }
-public StudentProfile getStudentProfile() { return studentProfile; }
-public void setStudentProfile(StudentProfile studentProfile) { this.studentProfile = studentProfile; }
-public Integer getTotalCases() { return totalCases; }
-public void setTotalCases(Integer totalCases) { this.totalCases = totalCases; }
-public String getFlagSeverity() { return flagSeverity; }
-public void setFlagSeverity(String flagSeverity) { this.flagSeverity = flagSeverity; }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public StudentProfile getStudentProfile() { return studentProfile; }
+    public void setStudentProfile(StudentProfile studentProfile) { this.studentProfile = studentProfile; }
+    public Integer getTotalCases() { return totalCases; }
+    public void setTotalCases(Integer totalCases) { this.totalCases = totalCases; }
+    public LocalDate getFirstIncidentDate() { return firstIncidentDate; }
+    public void setFirstIncidentDate(LocalDate firstIncidentDate) { this.firstIncidentDate = firstIncidentDate; }
+    public String getFlagSeverity() { return flagSeverity; }
+    public void setFlagSeverity(String flagSeverity) { this.flagSeverity = flagSeverity; }
 }
-
