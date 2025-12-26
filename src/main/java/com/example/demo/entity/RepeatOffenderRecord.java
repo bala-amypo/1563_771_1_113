@@ -10,34 +10,47 @@ public class RepeatOffenderRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relationship with StudentProfile
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
+    // -------------------------
+    // Relationships
+    // -------------------------
+    @OneToOne
+    @JoinColumn(name = "student_profile_id", nullable = false)
     private StudentProfile studentProfile;
 
+    // -------------------------
+    // Fields
+    // -------------------------
     @Column(nullable = false)
     private int totalCases;
 
     @Column(nullable = false)
     private boolean repeatOffender;
 
-    @Column(length = 50)
+    @Column(length = 20)
     private String flagSeverity;
 
-    // ---------------- Constructors ----------------
+    // -------------------------
+    // Constructors
+    // -------------------------
 
+    // REQUIRED by JPA & tests
     public RepeatOffenderRecord() {
     }
 
-    public RepeatOffenderRecord(StudentProfile studentProfile, int totalCases,
-                                boolean repeatOffender, String flagSeverity) {
+    // OPTIONAL convenience constructor
+    public RepeatOffenderRecord(StudentProfile studentProfile,
+                                int totalCases,
+                                boolean repeatOffender,
+                                String flagSeverity) {
         this.studentProfile = studentProfile;
         this.totalCases = totalCases;
         this.repeatOffender = repeatOffender;
         this.flagSeverity = flagSeverity;
     }
 
-    // ---------------- Getters & Setters ----------------
+    // -------------------------
+    // Getters & Setters
+    // -------------------------
 
     public Long getId() {
         return id;
