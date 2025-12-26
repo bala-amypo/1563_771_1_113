@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class RepeatOffenderRecord {
@@ -12,20 +13,28 @@ public class RepeatOffenderRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String studentId;
+    // 🔗 Link to StudentProfile
+    @ManyToOne
+    private StudentProfile studentProfile;
 
     private int repeatCount;
 
+    private String flagSeverity;
+
     private boolean active;
 
-    // ✅ No-argument constructor (REQUIRED by JPA)
+    // ✅ No-args constructor (REQUIRED by JPA)
     public RepeatOffenderRecord() {
     }
 
-    // ✅ All-argument constructor (REQUIRED by test cases)
-    public RepeatOffenderRecord(String studentId, int repeatCount, boolean active) {
-        this.studentId = studentId;
+    // ✅ All-args constructor (used by tests / logic)
+    public RepeatOffenderRecord(StudentProfile studentProfile,
+                                int repeatCount,
+                                String flagSeverity,
+                                boolean active) {
+        this.studentProfile = studentProfile;
         this.repeatCount = repeatCount;
+        this.flagSeverity = flagSeverity;
         this.active = active;
     }
 
@@ -39,12 +48,12 @@ public class RepeatOffenderRecord {
         this.id = id;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public StudentProfile getStudentProfile() {
+        return studentProfile;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setStudentProfile(StudentProfile studentProfile) {
+        this.studentProfile = studentProfile;
     }
 
     public int getRepeatCount() {
@@ -53,6 +62,14 @@ public class RepeatOffenderRecord {
 
     public void setRepeatCount(int repeatCount) {
         this.repeatCount = repeatCount;
+    }
+
+    public String getFlagSeverity() {
+        return flagSeverity;
+    }
+
+    public void setFlagSeverity(String flagSeverity) {
+        this.flagSeverity = flagSeverity;
     }
 
     public boolean isActive() {
