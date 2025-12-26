@@ -1,25 +1,25 @@
-package com.example.demo.controller;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.EvidenceRecord;
+import com.example.demo.repository.EvidenceRecordRepository;
+import com.example.demo.repository.IntegrityCaseRepository;
 import com.example.demo.service.EvidenceRecordService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
-@RestController
-@RequestMapping("/api/evidence")
-@Tag(name = "Evidence Records")
-public class EvidenceRecordController {
-    private final EvidenceRecordService service;
+@Service
+public class EvidenceRecordServiceImpl implements EvidenceRecordService {
+    private final EvidenceRecordRepository repo;
+    private final IntegrityCaseRepository caseRepo;
 
-    public EvidenceRecordController(EvidenceRecordService service) {
-        this.service = service;
+    public EvidenceRecordServiceImpl(EvidenceRecordRepository repo, IntegrityCaseRepository caseRepo) {
+        this.repo = repo;
+        this.caseRepo = caseRepo;
     }
 
-    @PostMapping
-    @Operation(summary = "Submit evidence")
-    public ResponseEntity<EvidenceRecord> submitEvidence(@RequestBody EvidenceRecord e) {
-        return ResponseEntity.ok(service.submitEvidence(e));
+    @Override
+    public EvidenceRecord submitEvidence(EvidenceRecord e) {
+        // Ensure case exists
+        caseRepo.findById(e.getIntegrityCase().getId());
+        return repo.save(e);
     }
 }
