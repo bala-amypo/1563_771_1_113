@@ -13,32 +13,42 @@ public class RepeatOffenderRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 🔗 Link to StudentProfile
+    // 🔗 Relation with StudentProfile
     @ManyToOne
     private StudentProfile studentProfile;
 
-    private int repeatCount;
+    // 🔢 Total integrity cases
+    private int totalCases;
 
+    // 🔁 Repeat offender flag
+    private boolean repeatOffender;
+
+    // ⚠ Severity level
     private String flagSeverity;
 
+    // ✅ Active status
     private boolean active;
 
-    // ✅ No-args constructor (REQUIRED by JPA)
+    // ================= CONSTRUCTORS =================
+
+    // Required by JPA
     public RepeatOffenderRecord() {
     }
 
-    // ✅ All-args constructor (used by tests / logic)
+    // Useful constructor
     public RepeatOffenderRecord(StudentProfile studentProfile,
-                                int repeatCount,
+                                int totalCases,
+                                boolean repeatOffender,
                                 String flagSeverity,
                                 boolean active) {
         this.studentProfile = studentProfile;
-        this.repeatCount = repeatCount;
+        this.totalCases = totalCases;
+        this.repeatOffender = repeatOffender;
         this.flagSeverity = flagSeverity;
         this.active = active;
     }
 
-    // ✅ Getters and Setters
+    // ================= GETTERS & SETTERS =================
 
     public Long getId() {
         return id;
@@ -56,14 +66,25 @@ public class RepeatOffenderRecord {
         this.studentProfile = studentProfile;
     }
 
-    public int getRepeatCount() {
-        return repeatCount;
+    // 🔹 totalCases
+    public int getTotalCases() {
+        return totalCases;
     }
 
-    public void setRepeatCount(int repeatCount) {
-        this.repeatCount = repeatCount;
+    public void setTotalCases(int totalCases) {
+        this.totalCases = totalCases;
     }
 
+    // 🔹 repeatOffender
+    public boolean isRepeatOffender() {
+        return repeatOffender;
+    }
+
+    public void setRepeatOffender(boolean repeatOffender) {
+        this.repeatOffender = repeatOffender;
+    }
+
+    // 🔹 flagSeverity
     public String getFlagSeverity() {
         return flagSeverity;
     }
@@ -72,11 +93,10 @@ public class RepeatOffenderRecord {
         this.flagSeverity = flagSeverity;
     }
 
+    // 🔹 active
     public boolean isActive() {
         return active;
     }
 
     public void setActive(boolean active) {
-        this.active = active;
-    }
-}
+        this.
