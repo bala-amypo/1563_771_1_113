@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping("/api/evidence")
 @Tag(name = "Evidence Records")
+@SecurityRequirement(name = "bearerAuth")
 public class EvidenceRecordController {
     private final EvidenceRecordService service;
 

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping("/api/penalties")
 @Tag(name = "Penalty Actions")
+@SecurityRequirement(name = "bearerAuth")
 public class PenaltyActionController {
     private final PenaltyActionService service;
 

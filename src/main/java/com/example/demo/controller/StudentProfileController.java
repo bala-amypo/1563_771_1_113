@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping("/api/students")
 @Tag(name = "Student Profile")
+@SecurityRequirement(name = "bearerAuth")
 public class StudentProfileController {
     private final StudentProfileService service;
 

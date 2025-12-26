@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping("/api/cases")
 @Tag(name = "Integrity Cases")
+@SecurityRequirement(name = "bearerAuth")
 public class IntegrityCaseController {
     private final IntegrityCaseService service;
 
