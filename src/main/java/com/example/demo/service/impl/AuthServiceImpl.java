@@ -13,17 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 @Service
+
 public class AuthServiceImpl implements AuthService {
-
-    private final AuthenticationManager authenticationManager;
-
-    public AuthServiceImpl(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
-}
-// public class AuthServiceImpl implements AuthService {
     private final AppUserRepository userRepo;
     private final RoleRepository roleRepo;
     private final PasswordEncoder encoder;
