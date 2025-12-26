@@ -1,3 +1,15 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.repository.AppUserRepository;
+import com.example.demo.repository.RoleRepository;
+import com.example.demo.security.JwtTokenProvider;
+import com.example.demo.payload.LoginRequest;
+import com.example.demo.payload.RegisterRequest;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 @Service
 public class AuthServiceImpl {
 

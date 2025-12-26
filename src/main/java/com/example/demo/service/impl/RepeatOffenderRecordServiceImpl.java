@@ -1,17 +1,17 @@
-// package com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
-// import com.example.demo.entity.IntegrityCase;
-// import com.example.demo.entity.RepeatOffenderRecord;
-// import com.example.demo.entity.StudentProfile;
-// import com.example.demo.repository.IntegrityCaseRepository;
-// import com.example.demo.repository.RepeatOffenderRecordRepository;
-// import com.example.demo.repository.StudentProfileRepository;
-// import com.example.demo.service.RepeatOffenderRecordService;
+import com.example.demo.entity.IntegrityCase;
+import com.example.demo.entity.RepeatOffenderRecord;
+import com.example.demo.entity.StudentProfile;
+import com.example.demo.repository.IntegrityCaseRepository;
+import com.example.demo.repository.RepeatOffenderRecordRepository;
+import com.example.demo.repository.StudentProfileRepository;
+import com.example.demo.service.RepeatOffenderRecordService;
 
-// import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
 
-// import java.time.LocalDate;
-// import java.util.List;
+import java.time.LocalDate;
+import java.util.List;
 
 // @Service
 // public class RepeatOffenderRecordServiceImpl
