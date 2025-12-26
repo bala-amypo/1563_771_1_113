@@ -2,23 +2,26 @@ package com.example.demo.dto;
 
 public class LoginRequest {
 
-    private String username;
+    private String email;
     private String password;
 
+    // ✅ No-args constructor
     public LoginRequest() {
     }
 
-    public LoginRequest(String username, String password) {
-        this.username = username;
+    // ✅ All-args constructor
+    public LoginRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    // ✅ Getter & Setter
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
