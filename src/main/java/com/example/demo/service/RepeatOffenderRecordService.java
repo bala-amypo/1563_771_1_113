@@ -1,4 +1,11 @@
 package com.example.demo.service;
+
+import com.example.demo.entity.RepeatOffenderRecord;
+import com.example.demo.entity.StudentProfile;
+
 public interface RepeatOffenderRecordService {
-    // Interface logic as per requirement, though implementation is what's instantiated in test
+
+    RepeatOffenderRecord createRepeatOffenderRecord(StudentProfile studentProfile);
+
+    RepeatOffenderRecord getRecordByStudent(Long studentId);
 }
