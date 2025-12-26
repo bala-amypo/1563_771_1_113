@@ -74,5 +74,9 @@ public class StudentProfile {
 public void setCreatedAt(LocalDateTime time) {
     this.createdAt = time;
 }
+public List<IntegrityCase> getIntegrityCases() {
+    return integrityCases;
+}
+
 }
 
