@@ -1,17 +1,20 @@
 package com.example.demo.util;
 
 import com.example.demo.entity.IntegrityCase;
+import com.example.demo.entity.RepeatOffenderRecord;
+import com.example.demo.entity.StudentProfile;
+
 import java.util.List;
 
 public class RepeatOffenderCalculator {
 
-    public int calculateTotalCases(List<IntegrityCase> cases) {
-        return cases == null ? 0 : cases.size();
-    }
+    public RepeatOffenderRecord computeRepeatOffenderRecord(
+            StudentProfile studentProfile,
+            List<IntegrityCase> cases) {
 
-    public String calculateSeverity(int totalCases) {
-        if (totalCases >= 4) return "HIGH";
-        if (totalCases >= 2) return "MEDIUM";
-        return "LOW";
+        RepeatOffenderRecord record = new RepeatOffenderRecord();
+        record.setStudentProfile(studentProfile);
+        record.setRepeatOffender(cases != null && cases.size() > 1);
+        return record;
     }
 }

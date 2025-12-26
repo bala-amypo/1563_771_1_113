@@ -107,5 +107,8 @@ public class IntegrityCase {
     public void setCreatedAt(LocalDateTime time) {
     this.createdAt = time;
 }
+public List<Penalty> getPenalties() {
+    return penalties;
+}
 
 }
