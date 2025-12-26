@@ -1,60 +1,49 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.EvidenceRecord;
+import com.example.demo.repository.EvidenceRecordRepository;
 import com.example.demo.service.EvidenceRecordService;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/evidence-records")
+@RequestMapping("/api/evidence")
 public class EvidenceRecordController {
 
-    private final EvidenceRecordService evidenceRecordService;
+private final EvidenceRecordService evidenceRecordService;
+private final EvidenceRecordRepository evidenceRecordRepository;
 
-    public EvidenceRecordController(EvidenceRecordService evidenceRecordService) {
-        this.evidenceRecordService = evidenceRecordService;
-    }
+public EvidenceRecordController(EvidenceRecordService evidenceRecordService,
+EvidenceRecordRepository evidenceRecordRepository) {
+this.evidenceRecordService = evidenceRecordService;
+this.evidenceRecordRepository = evidenceRecordRepository;
+}
 
-    /* ===== CREATE EVIDENCE RECORD ===== */
-    @PostMapping
-    public ResponseEntity<EvidenceRecord> createEvidence(
-            @RequestBody EvidenceRecord evidenceRecord) {
+// POST /api/evidence/ – Submit new evidence
+@PostMapping("/")
+public EvidenceRecord submit(@RequestBody EvidenceRecord evidence) {
+return evidenceRecordService.submitEvidence(evidence);
+}
 
-        EvidenceRecord saved =
-                evidenceRecordService.createEvidenceRecord(evidenceRecord);
+// GET /api/evidence/case/{caseId} – Get evidence for case
+@GetMapping("/case/{caseId}")
+public List<EvidenceRecord> getByCase(@PathVariable Long caseId) {
+return evidenceRecordRepository.findAll().stream()
+.filter(e -> e.getIntegrityCase() != null &&
+caseId.equals(e.getIntegrityCase().getId()))
+.toList();
+}
 
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
-    }
+// GET /api/evidence/{id} – Get evidence by ID
+@GetMapping("/{id}")
+public EvidenceRecord getById(@PathVariable Long id) {
+return evidenceRecordRepository.findById(id).orElse(null);
+}
 
-    /* ===== GET EVIDENCE BY ID ===== */
-    @GetMapping("/{id}")
-    public ResponseEntity<EvidenceRecord> getEvidenceById(
-            @PathVariable Long id) {
-
-        return ResponseEntity.ok(
-                evidenceRecordService.getEvidenceRecordById(id)
-        );
-    }
-
-    /* ===== GET EVIDENCE BY CASE ID ===== */
-    @GetMapping("/case/{caseId}")
-    public ResponseEntity<List<EvidenceRecord>> getEvidenceByCaseId(
-            @PathVariable Long caseId) {
-
-        return ResponseEntity.ok(
-                evidenceRecordService.getEvidenceRecordsByCaseId(caseId)
-        );
-    }
-
-    /* ===== GET ALL EVIDENCE ===== */
-    @GetMapping
-    public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
-        return ResponseEntity.ok(
-                evidenceRecordService.getAllEvidenceRecords()
-        );
-    }
+// GET /api/evidence/ – List all evidence
+@GetMapping("/")
+public List<EvidenceRecord> getAll() {
+return evidenceRecordRepository.findAll();
+}
 }
