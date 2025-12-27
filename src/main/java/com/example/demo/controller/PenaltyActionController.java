@@ -55,47 +55,39 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.PenaltyAction;
 import com.example.demo.service.PenaltyActionService;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;   // ✅ FIX 1: IMPORT List
+import java.util.List; // ✅ REQUIRED IMPORT
 
 @RestController
 @RequestMapping("/api/penalty-actions")
 public class PenaltyActionController {
 
-    // ✅ FIX 2: DECLARE & INJECT SERVICE
     private final PenaltyActionService penaltyActionService;
 
+    // ✅ CONSTRUCTOR INJECTION (FIXES variable not found)
     public PenaltyActionController(PenaltyActionService penaltyActionService) {
         this.penaltyActionService = penaltyActionService;
     }
 
-    // ✅ CREATE
     @PostMapping
     public ResponseEntity<PenaltyAction> createPenaltyAction(
             @RequestBody PenaltyAction penaltyAction) {
-        PenaltyAction saved =
-                penaltyActionService.createPenaltyAction(penaltyAction);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+        return ResponseEntity.ok(
+                penaltyActionService.createPenaltyAction(penaltyAction));
     }
 
-    // ✅ GET BY ID
     @GetMapping("/{id}")
     public ResponseEntity<PenaltyAction> getPenaltyActionById(
             @PathVariable Long id) {
-        PenaltyAction action =
-                penaltyActionService.getPenaltyActionById(id);
-        return ResponseEntity.ok(action);
+        return ResponseEntity.ok(
+                penaltyActionService.getPenaltyActionById(id));
     }
 
-    // ✅ GET ALL
     @GetMapping
     public ResponseEntity<List<PenaltyAction>> getAllPenaltyActions() {
-        List<PenaltyAction> actions =
-                penaltyActionService.getAllPenaltyActions();
-        return ResponseEntity.ok(actions);
+        return ResponseEntity.ok(
+                penaltyActionService.getAllPenaltyActions());
     }
 }

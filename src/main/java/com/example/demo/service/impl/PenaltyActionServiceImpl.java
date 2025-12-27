@@ -1,29 +1,66 @@
+// package com.example.demo.service.impl;
+
+// import com.example.demo.entity.IntegrityCase;
+// import com.example.demo.entity.PenaltyAction;
+// import com.example.demo.exception.ResourceNotFoundException;
+// import com.example.demo.repository.IntegrityCaseRepository;
+// import com.example.demo.repository.PenaltyActionRepository;
+// import com.example.demo.service.PenaltyActionService;
+// import org.springframework.stereotype.Service;
+
+// @Service
+// public class PenaltyActionServiceImpl implements PenaltyActionService {
+//     private final PenaltyActionRepository repo;
+//     private final IntegrityCaseRepository caseRepo;
+
+//     public PenaltyActionServiceImpl(PenaltyActionRepository repo, IntegrityCaseRepository caseRepo) {
+//         this.repo = repo;
+//         this.caseRepo = caseRepo;
+//     }
+
+//     @Override
+//     public PenaltyAction addPenalty(PenaltyAction p) {
+//         IntegrityCase c = caseRepo.findById(p.getIntegrityCase().getId())
+//                 .orElseThrow(() -> new ResourceNotFoundException("Case not found"));
+//         c.setStatus("UNDER_REVIEW");
+//         caseRepo.save(c);
+//         return repo.save(p);
+//     }
+// }
+
+
+
+
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.IntegrityCase;
 import com.example.demo.entity.PenaltyAction;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.IntegrityCaseRepository;
 import com.example.demo.repository.PenaltyActionRepository;
 import com.example.demo.service.PenaltyActionService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PenaltyActionServiceImpl implements PenaltyActionService {
-    private final PenaltyActionRepository repo;
-    private final IntegrityCaseRepository caseRepo;
 
-    public PenaltyActionServiceImpl(PenaltyActionRepository repo, IntegrityCaseRepository caseRepo) {
-        this.repo = repo;
-        this.caseRepo = caseRepo;
+    private final PenaltyActionRepository penaltyActionRepository;
+
+    public PenaltyActionServiceImpl(PenaltyActionRepository penaltyActionRepository) {
+        this.penaltyActionRepository = penaltyActionRepository;
     }
 
     @Override
-    public PenaltyAction addPenalty(PenaltyAction p) {
-        IntegrityCase c = caseRepo.findById(p.getIntegrityCase().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Case not found"));
-        c.setStatus("UNDER_REVIEW");
-        caseRepo.save(c);
-        return repo.save(p);
+    public PenaltyAction createPenaltyAction(PenaltyAction penaltyAction) {
+        return penaltyActionRepository.save(penaltyAction);
+    }
+
+    @Override
+    public PenaltyAction getPenaltyActionById(Long id) {
+        return penaltyActionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<PenaltyAction> getAllPenaltyActions() {
+        return penaltyActionRepository.findAll();
     }
 }
