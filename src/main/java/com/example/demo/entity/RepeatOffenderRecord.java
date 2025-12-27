@@ -33,6 +33,7 @@
 
 package com.example.demo.entity;
 
+import com.example.demo.repository.RepeatOffenderRecordRepository;
 import jakarta.persistence.*;
 
 @Entity
@@ -45,7 +46,7 @@ public class RepeatOffenderRecord {
     @ManyToOne
     private StudentProfile studentProfile;
 
-    // 🔹 Used by calculator & tests
+    // Required by tests & calculator
     private Integer totalCases;
 
     private Integer offenseCount;
@@ -65,6 +66,11 @@ public class RepeatOffenderRecord {
         this.studentProfile = studentProfile;
         this.offenseCount = offenseCount;
         this.active = active;
+    }
+
+    // ✅ Constructor required by Mockito tests
+    public RepeatOffenderRecord(RepeatOffenderRecordRepository repository) {
+        // No implementation needed
     }
 
     // ===== GETTERS & SETTERS =====
