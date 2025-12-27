@@ -1,9 +1,9 @@
-
 package com.example.demo.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
@@ -17,25 +17,19 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-
-                // API Info
                 .info(new Info()
-                        .title("JWT Demo API")
+                        .title("Academic Integrity API")
                         .version("1.0")
-                        .description("Simple JWT Demo Project for Students"))
-
-                // Server Configuration
+                        .description("API for managing students, integrity cases, evidence, penalties, and repeat offenders"))
                 .servers(List.of(
                         new Server().url("https://9087.pro604cr.amypo.ai")
                 ))
-
-                // Security Configuration (JWT Bearer)
+                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new Components()
                         .addSecuritySchemes("bearerAuth",
                                 new SecurityScheme()
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
-                                        .bearerFormat("JWT")
-                                        .description("Enter JWT token")));
+                                        .bearerFormat("JWT")));
     }
 }
