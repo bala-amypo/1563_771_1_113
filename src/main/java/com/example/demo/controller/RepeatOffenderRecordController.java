@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.RepeatOffenderRecord;
 import com.example.demo.service.RepeatOffenderRecordService;
-
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/repeat-offenders")
+@SecurityRequirement(name = "bearerAuth")
 public class RepeatOffenderRecordController {
 
     private final RepeatOffenderRecordService repeatOffenderRecordService;
