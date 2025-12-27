@@ -45,15 +45,20 @@ public class RepeatOffenderRecord {
     @ManyToOne
     private StudentProfile studentProfile;
 
+    // 🔹 Used by calculator & tests
+    private Integer totalCases;
+
     private Integer offenseCount;
+
+    private String flagSeverity;
 
     private Boolean active = true;
 
-    // ✅ No-args constructor
+    // ✅ No-args constructor (required by JPA)
     public RepeatOffenderRecord() {
     }
 
-    // ✅ Parameterized constructor
+    // ✅ Parameterized constructor (required by tests)
     public RepeatOffenderRecord(StudentProfile studentProfile,
                                 Integer offenseCount,
                                 Boolean active) {
@@ -62,7 +67,7 @@ public class RepeatOffenderRecord {
         this.active = active;
     }
 
-    // ✅ GETTERS & SETTERS
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;
@@ -80,12 +85,28 @@ public class RepeatOffenderRecord {
         this.studentProfile = studentProfile;
     }
 
+    public Integer getTotalCases() {
+        return totalCases;
+    }
+
+    public void setTotalCases(Integer totalCases) {
+        this.totalCases = totalCases;
+    }
+
     public Integer getOffenseCount() {
         return offenseCount;
     }
 
     public void setOffenseCount(Integer offenseCount) {
         this.offenseCount = offenseCount;
+    }
+
+    public String getFlagSeverity() {
+        return flagSeverity;
+    }
+
+    public void setFlagSeverity(String flagSeverity) {
+        this.flagSeverity = flagSeverity;
     }
 
     public Boolean getActive() {
