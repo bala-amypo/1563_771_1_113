@@ -9,21 +9,26 @@ public class PenaltyAction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "integrity_case_id", nullable = false)
     private IntegrityCase integrityCase;
-
+    
+    @Column(nullable = false)
     private String penaltyType;
+    
+    @Column(columnDefinition = "TEXT")
     private String details;
+    
+    @Column(nullable = false)
     private String issuedBy;
     
+    @Column(nullable = false)
     private LocalDateTime issuedAt = LocalDateTime.now();
 
-    @PrePersist
-    public void onCreate() {
-        if (this.issuedAt == null) this.issuedAt = LocalDateTime.now();
-    }
-
+    // Constructors, Getters, Setters
+    public PenaltyAction() {}
+    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public IntegrityCase getIntegrityCase() { return integrityCase; }
