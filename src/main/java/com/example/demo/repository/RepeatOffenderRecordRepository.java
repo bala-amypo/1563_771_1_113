@@ -21,6 +21,6 @@ import java.util.List;
 public interface RepeatOffenderRecordRepository
         extends JpaRepository<RepeatOffenderRecord, Long> {
 
-    // ✅ REQUIRED BY TEST CASES
+    // ✅ MUST return List (tests expect this)
     List<RepeatOffenderRecord> findByStudentProfile(StudentProfile studentProfile);
 }
