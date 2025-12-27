@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.*;
+import com.example.demo.dto.JwtResponse;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.AppUser;
 import com.example.demo.entity.Role;
 import com.example.demo.repository.AppUserRepository;
@@ -14,44 +16,58 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class AuthServiceImpl implements AuthService {
-    private final AppUserRepository userRepo;
-    private final RoleRepository roleRepo;
-    private final PasswordEncoder encoder;
-    private final AuthenticationManager authManager;
-    private final JwtTokenProvider jwtProvider;
 
-    public AuthServiceImpl(AppUserRepository userRepo, RoleRepository roleRepo, PasswordEncoder encoder,
-                           AuthenticationManager authManager, JwtTokenProvider jwtProvider) {
-        this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
-        this.encoder = encoder;
-        this.authManager = authManager;
-        this.jwtProvider = jwtProvider;
+    private final AppUserRepository appUserRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
+
+    // Constructor used in tests and by Spring
+    public AuthServiceImpl(AppUserRepository appUserRepository,
+                           RoleRepository roleRepository,
+                           PasswordEncoder passwordEncoder,
+                           AuthenticationManager authenticationManager,
+                           JwtTokenProvider jwtTokenProvider) {
+        this.appUserRepository = appUserRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
-    public void register(RegisterRequest req) {
-        if (userRepo.existsByEmail(req.getEmail())) {
-            throw new IllegalArgumentException("Email exists");
+    public void register(RegisterRequest request) {
+        if (appUserRepository.existsByEmail(request.getEmail())) {
+            throw new IllegalArgumentException("Email already exists");
         }
-        AppUser user = new AppUser(req.getFullName(), req.getEmail(), encoder.encode(req.getPassword()));
-        roleRepo.findByName(req.getRole()).ifPresent(r -> user.getRoles().add(r));
-        userRepo.save(user);
+
+        AppUser user = new AppUser();
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setFullName(request.getFullName());
+
+        Role role = roleRepository.findByName(request.getRole())
+                .orElseThrow(() -> new IllegalArgumentException("Role not found"));
+        user.getRoles().add(role);
+
+        appUserRepository.save(user);
     }
 
     @Override
-    public JwtResponse login(LoginRequest req) {
-        Authentication auth = authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
-        
-        AppUser user = userRepo.findByEmail(req.getEmail())
+    public JwtResponse login(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getEmail(), loginRequest.getPassword()));
+
+        AppUser user = appUserRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        
-        String role = user.getRoles().isEmpty() ? "" : user.getRoles().iterator().next().getName();
-        String token = jwtProvider.generateToken(auth, user.getId(), user.getEmail(), role);
-        
-        return new JwtResponse(token, user.getEmail(), role);
+
+        String roleName = user.getRoles().iterator().next().getName();
+        String token = jwtTokenProvider.generateToken(authentication, user.getId(),
+                user.getEmail(), roleName);
+
+        return new JwtResponse(token, user.getEmail(), roleName);
     }
 }
