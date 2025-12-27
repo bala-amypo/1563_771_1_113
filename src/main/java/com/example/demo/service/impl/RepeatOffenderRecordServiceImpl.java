@@ -1,47 +1,38 @@
-// package com.example.demo.service.impl;
-
-// import com.example.demo.repository.*;
-// import com.example.demo.service.RepeatOffenderRecordService;
-// import com.example.demo.util.RepeatOffenderCalculator;
-// import org.springframework.stereotype.Service;
-
-// @Service
-// public class RepeatOffenderRecordServiceImpl implements RepeatOffenderRecordService {
-//     public RepeatOffenderRecordServiceImpl(StudentProfileRepository spr, IntegrityCaseRepository icr,
-//                                            RepeatOffenderRecordRepository rorr, RepeatOffenderCalculator roc) {
-//     }
-// }
-
-
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.RepeatOffenderRecord;
+import com.example.demo.entity.StudentProfile;
+import com.example.demo.repository.IntegrityCaseRepository;
 import com.example.demo.repository.RepeatOffenderRecordRepository;
+import com.example.demo.repository.StudentProfileRepository;
+import com.example.demo.service.RepeatOffenderRecordService;
+import com.example.demo.util.RepeatOffenderCalculator;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class RepeatOffenderRecordServiceImpl implements RepeatOffenderRecordService {
 
-    private final RepeatOffenderRecordRepository repository;
+    private final StudentProfileRepository studentProfileRepository;
+    private final IntegrityCaseRepository integrityCaseRepository;
+    private final RepeatOffenderRecordRepository repeatOffenderRecordRepository;
+    private final RepeatOffenderCalculator calculator;
 
-    public RepeatOffenderRecordServiceImpl(RepeatOffenderRecordRepository repository) {
-        this.repository = repository;
+    // >>> ADD THIS CONSTRUCTOR (used in tests)
+    public RepeatOffenderRecordServiceImpl(StudentProfileRepository studentProfileRepository,
+                                           IntegrityCaseRepository integrityCaseRepository,
+                                           RepeatOffenderRecordRepository repeatOffenderRecordRepository,
+                                           RepeatOffenderCalculator calculator) {
+        this.studentProfileRepository = studentProfileRepository;
+        this.integrityCaseRepository = integrityCaseRepository;
+        this.repeatOffenderRecordRepository = repeatOffenderRecordRepository;
+        this.calculator = calculator;
     }
 
     @Override
-    public RepeatOffenderRecord createRecord(RepeatOffenderRecord record) {
-        return repository.save(record);
-    }
-
-    @Override
-    public RepeatOffenderRecord getRecordById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<RepeatOffenderRecord> getAllRecords() {
-        return repository.findAll();
+    public RepeatOffenderRecord createRepeatOffenderRecord(StudentProfile studentProfile) {
+        RepeatOffenderRecord record = calculator.computeRepeatOffenderRecord(
+                studentProfile, integrityCaseRepository.findByStudentProfile(studentProfile));
+        record.setStudentProfile(studentProfile);
+        return repeatOffenderRecordRepository.save(record);
     }
 }
