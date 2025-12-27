@@ -1,93 +1,49 @@
-// package com.example.demo.controller;
-
-// import com.example.demo.entity.PenaltyAction;
-// import com.example.demo.service.PenaltyActionService;
-// import io.swagger.v3.oas.annotations.Operation;
-// import io.swagger.v3.oas.annotations.tags.Tag;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.*;
-// import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-// @RestController
-// @RequestMapping("/api/penalties")
-// @Tag(name = "Penalty Actions")
-// @SecurityRequirement(name = "bearerAuth")
-// public class PenaltyActionController {
-//     private final PenaltyActionService service;
-
-//     public PenaltyActionController(PenaltyActionService service) {
-//         this.service = service;
-//     }
-
-//     @PostMapping
-//     @Operation(summary = "Add penalty")
-//     public ResponseEntity<PenaltyAction> addPenalty(@RequestBody PenaltyAction p) {
-//         return ResponseEntity.ok(service.addPenalty(p));
-//     }
-//     @GetMapping("/{id}")
-//     public ResponseEntity<PenaltyAction> getPenaltyActionById(
-//             @PathVariable Long id) {
-
-//         return ResponseEntity.ok(
-//                 penaltyActionService.getPenaltyActionById(id)
-//         );
-//     }
-
-//     @GetMapping("/case/{caseId}")
-//     public ResponseEntity<List<PenaltyAction>> getPenaltyActionsByCaseId(
-//             @PathVariable Long caseId) {
-
-//         return ResponseEntity.ok(
-//                 penaltyActionService.getPenaltyActionsByCaseId(caseId)
-//         );
-//     }
-
-//     @GetMapping
-//     public ResponseEntity<List<PenaltyAction>> getAllPenaltyActions() {
-//         return ResponseEntity.ok(
-//                 penaltyActionService.getAllPenaltyActions()
-//         );
-//     }
-// }
-
-
-
 package com.example.demo.controller;
 
 import com.example.demo.entity.PenaltyAction;
+import com.example.demo.repository.PenaltyActionRepository;
 import com.example.demo.service.PenaltyActionService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List; // ✅ REQUIRED IMPORT
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/penalty-actions")
+@RequestMapping("/api/penalties")
 public class PenaltyActionController {
 
     private final PenaltyActionService penaltyActionService;
+    private final PenaltyActionRepository penaltyActionRepository;
 
-    // ✅ CONSTRUCTOR INJECTION (FIXES variable not found)
-    public PenaltyActionController(PenaltyActionService penaltyActionService) {
+    public PenaltyActionController(PenaltyActionService penaltyActionService,
+                                   PenaltyActionRepository penaltyActionRepository) {
         this.penaltyActionService = penaltyActionService;
+        this.penaltyActionRepository = penaltyActionRepository;
     }
 
-    @PostMapping
-    public ResponseEntity<PenaltyAction> createPenaltyAction(
-            @RequestBody PenaltyAction penaltyAction) {
-        return ResponseEntity.ok(
-                penaltyActionService.createPenaltyAction(penaltyAction));
+    // POST /api/penalties/ – Add penalty
+    @PostMapping("/")
+    public PenaltyAction add(@RequestBody PenaltyAction penaltyAction) {
+        return penaltyActionService.addPenalty(penaltyAction);
     }
 
+    // GET /api/penalties/case/{caseId} – Get penalties for case
+    @GetMapping("/case/{caseId}")
+    public List<PenaltyAction> getByCase(@PathVariable Long caseId) {
+        return penaltyActionRepository.findAll().stream()
+                .filter(p -> p.getIntegrityCase() != null &&
+                             caseId.equals(p.getIntegrityCase().getId()))
+                .toList();
+    }
+
+    // GET /api/penalties/{id} – Get penalty by ID
     @GetMapping("/{id}")
-    public ResponseEntity<PenaltyAction> getPenaltyActionById(
-            @PathVariable Long id) {
-        return ResponseEntity.ok(
-                penaltyActionService.getPenaltyActionById(id));
+    public PenaltyAction getById(@PathVariable Long id) {
+        return penaltyActionRepository.findById(id).orElse(null);
     }
 
-    @GetMapping
-    public ResponseEntity<List<PenaltyAction>> getAllPenaltyActions() {
-        return ResponseEntity.ok(
-                penaltyActionService.getAllPenaltyActions());
+    // GET /api/penalties/ – List all penalties
+    @GetMapping("/")
+    public List<PenaltyAction> getAll() {
+        return penaltyActionRepository.findAll();
     }
 }
