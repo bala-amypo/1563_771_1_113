@@ -1,53 +1,37 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.entity.RepeatOffenderRecord;
-// import com.example.demo.entity.StudentProfile;
-// import com.example.demo.repository.RepeatOffenderRecordRepository;
-// import com.example.demo.repository.StudentProfileRepository;
-// import com.example.demo.service.RepeatOffenderRecordService;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.RepeatOffenderRecord;
+import com.example.demo.service.RepeatOffenderRecordService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-// import java.util.List;
+import java.util.List;
 
-// @RestController
-// @RequestMapping("/api/repeat-offenders")
-// public class RepeatOffenderRecordController {
+@RestController
+@RequestMapping("/api/repeat-offenders")
+public class RepeatOffenderRecordController {
 
-//     private final RepeatOffenderRecordService repeatOffenderRecordService;
-//     private final RepeatOffenderRecordRepository repeatOffenderRecordRepository;
-//     private final StudentProfileRepository studentProfileRepository;
+    private final RepeatOffenderRecordService service;
 
-//     public RepeatOffenderRecordController(RepeatOffenderRecordService repeatOffenderRecordService,
-//                                           RepeatOffenderRecordRepository repeatOffenderRecordRepository,
-//                                           StudentProfileRepository studentProfileRepository) {
-//         this.repeatOffenderRecordService = repeatOffenderRecordService;
-//         this.repeatOffenderRecordRepository = repeatOffenderRecordRepository;
-//         this.studentProfileRepository = studentProfileRepository;
-//     }
+    public RepeatOffenderRecordController(RepeatOffenderRecordService service) {
+        this.service = service;
+    }
 
-//     // POST /api/repeat-offenders/refresh/{studentId} – Recalculate repeat-offender status
-//     @PostMapping("/refresh/{studentId}")
-//     public RepeatOffenderRecord refresh(@PathVariable Long studentId) {
-//         StudentProfile student = studentProfileRepository.findById(studentId).orElse(null);
-//         if (student == null) {
-//             return null;
-//         }
-//         return repeatOffenderRecordService.createRepeatOffenderRecord(student);
-//     }
+    // PUT /api/repeat-offenders/refresh/{studentId}
+    @PutMapping("/refresh/{studentId}")
+    public ResponseEntity<RepeatOffenderRecord> refresh(@PathVariable Long studentId) {
+        return ResponseEntity.ok(service.refreshRepeatOffenderData(studentId));
+    }
 
-//     // GET /api/repeat-offenders/student/{studentId} – Get record for student
-//     @GetMapping("/student/{studentId}")
-//     public RepeatOffenderRecord getForStudent(@PathVariable Long studentId) {
-//         StudentProfile student = studentProfileRepository.findById(studentId).orElse(null);
-//         if (student == null) {
-//             return null;
-//         }
-//         return repeatOffenderRecordRepository.findByStudentProfile(student).orElse(null);
-//     }
+    // GET /api/repeat-offenders/student/{studentId}
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<RepeatOffenderRecord> getByStudent(@PathVariable Long studentId) {
+        return ResponseEntity.ok(service.getRecordByStudent(studentId));
+    }
 
-//     // GET /api/repeat-offenders/ – List all repeat offenders
-//     @GetMapping("/")
-//     public List<RepeatOffenderRecord> getAll() {
-//         return repeatOffenderRecordRepository.findAll();
-//     }
-// }
+    // GET /api/repeat-offenders
+    @GetMapping
+    public ResponseEntity<List<RepeatOffenderRecord>> getAll() {
+        return ResponseEntity.ok(service.getAllRepeatOffenders());
+    }
+}
