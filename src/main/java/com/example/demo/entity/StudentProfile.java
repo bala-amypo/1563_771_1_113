@@ -1,54 +1,52 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "integrity_cases")
-public class IntegrityCase {
+@Table(name = "student_profiles")
+public class StudentProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String studentId;
+    private String name;
+    private String email;
+    private String program;
+    private Integer yearLevel;
+    
+    // Fix: Init immediately
+    private Boolean repeatOffender = false;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ManyToOne
-    private StudentProfile studentProfile;
-
-    private String courseCode;
-    private String instructorName;
-    private String description;
-    private String status = "OPEN";
-    private LocalDate incidentDate;
-    private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "integrityCase")
-    private List<PenaltyAction> penalties = new ArrayList<>();
+    @OneToMany(mappedBy = "studentProfile")
+    private List<IntegrityCase> integrityCases = new ArrayList<>();
 
     @PrePersist
     public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        if (this.status == null) this.status = "OPEN";
+        if (this.createdAt == null) this.createdAt = LocalDateTime.now();
+        if (this.repeatOffender == null) this.repeatOffender = false;
     }
 
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public StudentProfile getStudentProfile() { return studentProfile; }
-    public void setStudentProfile(StudentProfile studentProfile) { this.studentProfile = studentProfile; }
-    public String getCourseCode() { return courseCode; }
-    public void setCourseCode(String courseCode) { this.courseCode = courseCode; }
-    public String getInstructorName() { return instructorName; }
-    public void setInstructorName(String instructorName) { this.instructorName = instructorName; }
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-    public LocalDate getIncidentDate() { return incidentDate; }
-    public void setIncidentDate(LocalDate incidentDate) { this.incidentDate = incidentDate; }
+    public String getStudentId() { return studentId; }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getProgram() { return program; }
+    public void setProgram(String program) { this.program = program; }
+    public Integer getYearLevel() { return yearLevel; }
+    public void setYearLevel(Integer yearLevel) { this.yearLevel = yearLevel; }
+    public Boolean getRepeatOffender() { return repeatOffender; }
+    public void setRepeatOffender(Boolean repeatOffender) { this.repeatOffender = repeatOffender; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-    public List<PenaltyAction> getPenalties() { return penalties; }
-    public void setPenalties(List<PenaltyAction> penalties) { this.penalties = penalties; }
+    public List<IntegrityCase> getIntegrityCases() { return integrityCases; }
+    public void setIntegrityCases(List<IntegrityCase> integrityCases) { this.integrityCases = integrityCases; }
 }
