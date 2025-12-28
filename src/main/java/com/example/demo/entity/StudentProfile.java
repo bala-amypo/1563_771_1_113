@@ -1,64 +1,161 @@
+// package com.example.demo.entity;
+
+// import jakarta.persistence.*;
+// import java.time.LocalDateTime;
+// import java.util.ArrayList;
+// import java.util.List;
+
+// @Entity
+// @Table(name = "student_profiles")
+// public class StudentProfile {
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
+    
+//     @Column(unique = true, nullable = false)
+//     private String studentId;
+    
+//     @Column(nullable = false)
+//     private String name;
+    
+//     @Column(unique = true, nullable = false)
+//     private String email;
+    
+//     @Column(nullable = false)
+//     private String program;
+    
+//     @Column(nullable = false)
+//     private Integer yearLevel;
+    
+//     private boolean repeatOffender = false;
+    
+//     @Column(nullable = false, updatable = false)
+//     private LocalDateTime createdAt = LocalDateTime.now();
+    
+//     @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//     private List<IntegrityCase> integrityCases = new ArrayList<>();
+    
+//     @OneToOne(mappedBy = "studentProfile", cascade = CascadeType.ALL)
+//     private RepeatOffenderRecord repeatOffenderRecord;
+
+//     // Constructors, Getters, Setters
+//     public StudentProfile() {}
+    
+//     public Long getId() { return id; }
+//     public void setId(Long id) { this.id = id; }
+//     public String getStudentId() { return studentId; }
+//     public void setStudentId(String studentId) { this.studentId = studentId; }
+//     public String getName() { return name; }
+//     public void setName(String name) { this.name = name; }
+//     public String getEmail() { return email; }
+//     public void setEmail(String email) { this.email = email; }
+//     public String getProgram() { return program; }
+//     public void setProgram(String program) { this.program = program; }
+//     public Integer getYearLevel() { return yearLevel; }
+//     public void setYearLevel(Integer yearLevel) { this.yearLevel = yearLevel; }
+//     public boolean getRepeatOffender() { return repeatOffender; }
+//     public void setRepeatOffender(boolean repeatOffender) { this.repeatOffender = repeatOffender; }
+//     public LocalDateTime getCreatedAt() { return createdAt; }
+//     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+//     public List<IntegrityCase> getIntegrityCases() { return integrityCases; }
+//     public void setIntegrityCases(List<IntegrityCase> integrityCases) { this.integrityCases = integrityCases; }
+//     public RepeatOffenderRecord getRepeatOffenderRecord() { return repeatOffenderRecord; }
+//     public void setRepeatOffenderRecord(RepeatOffenderRecord repeatOffenderRecord) { this.repeatOffenderRecord = repeatOffenderRecord; }
+// }
+
+
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "student_profiles")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentProfile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(unique = true, nullable = false)
     private String studentId;
-    
+
     @Column(nullable = false)
     private String name;
-    
+
     @Column(unique = true, nullable = false)
     private String email;
-    
+
     @Column(nullable = false)
     private String program;
-    
+
     @Column(nullable = false)
     private Integer yearLevel;
-    
+
     private boolean repeatOffender = false;
-    
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
-    
+
     @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<IntegrityCase> integrityCases = new ArrayList<>();
-    
+
     @OneToOne(mappedBy = "studentProfile", cascade = CascadeType.ALL)
     private RepeatOffenderRecord repeatOffenderRecord;
 
-    // Constructors, Getters, Setters
+    // ✅ REQUIRED BY JPA
     public StudentProfile() {}
-    
+
+    /**
+     * 🔥 CRITICAL FIX
+     * Allows Jackson to deserialize:
+     * "studentProfile": "string"
+     * without throwing 500
+     */
+    @JsonCreator
+    public StudentProfile(String value) {
+        // intentionally empty
+        // prevents Jackson deserialization crash
+    }
+
+    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public String getStudentId() { return studentId; }
     public void setStudentId(String studentId) { this.studentId = studentId; }
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
     public String getProgram() { return program; }
     public void setProgram(String program) { this.program = program; }
+
     public Integer getYearLevel() { return yearLevel; }
     public void setYearLevel(Integer yearLevel) { this.yearLevel = yearLevel; }
+
     public boolean getRepeatOffender() { return repeatOffender; }
     public void setRepeatOffender(boolean repeatOffender) { this.repeatOffender = repeatOffender; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
     public List<IntegrityCase> getIntegrityCases() { return integrityCases; }
-    public void setIntegrityCases(List<IntegrityCase> integrityCases) { this.integrityCases = integrityCases; }
+    public void setIntegrityCases(List<IntegrityCase> integrityCases) {
+        this.integrityCases = integrityCases;
+    }
+
     public RepeatOffenderRecord getRepeatOffenderRecord() { return repeatOffenderRecord; }
-    public void setRepeatOffenderRecord(RepeatOffenderRecord repeatOffenderRecord) { this.repeatOffenderRecord = repeatOffenderRecord; }
+    public void setRepeatOffenderRecord(RepeatOffenderRecord repeatOffenderRecord) {
+        this.repeatOffenderRecord = repeatOffenderRecord;
+    }
 }
