@@ -76,7 +76,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "student_profiles")
-@JsonIgnoreProperties(ignoreUnknown = false)
+@JsonIgnoreProperties(StudentProfile)
 public class StudentProfile {
 
     @Id
