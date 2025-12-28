@@ -67,9 +67,10 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,10 +104,13 @@ public class StudentProfile {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    // Avoid infinite loop with JsonManagedReference
     @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<IntegrityCase> integrityCases = new ArrayList<>();
 
     @OneToOne(mappedBy = "studentProfile", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private RepeatOffenderRecord repeatOffenderRecord;
 
     // ✅ REQUIRED BY JPA
@@ -121,7 +125,6 @@ public class StudentProfile {
     @JsonCreator
     public StudentProfile(String value) {
         // intentionally empty
-        // prevents Jackson deserialization crash
     }
 
     // Getters & Setters
@@ -150,12 +153,8 @@ public class StudentProfile {
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
     public List<IntegrityCase> getIntegrityCases() { return integrityCases; }
-    public void setIntegrityCases(List<IntegrityCase> integrityCases) {
-        this.integrityCases = integrityCases;
-    }
+    public void setIntegrityCases(List<IntegrityCase> integrityCases) { this.integrityCases = integrityCases; }
 
     public RepeatOffenderRecord getRepeatOffenderRecord() { return repeatOffenderRecord; }
-    public void setRepeatOffenderRecord(RepeatOffenderRecord repeatOffenderRecord) {
-        this.repeatOffenderRecord = repeatOffenderRecord;
-    }
+    public void setRepeatOffenderRecord(RepeatOffenderRecord repeatOffenderRecord) { this.repeatOffenderRecord = repeatOffenderRecord; }
 }
