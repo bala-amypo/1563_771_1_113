@@ -1,5 +1,5 @@
 package com.example.demo.controller;
-
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import com.example.demo.entity.IntegrityCase;
 import com.example.demo.service.IntegrityCaseService;
 import io.swagger.v3.oas.annotations.Operation;
