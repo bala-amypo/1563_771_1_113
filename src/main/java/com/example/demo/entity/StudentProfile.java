@@ -68,6 +68,8 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -76,7 +78,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "student_profiles")
-@JsonIgnoreProperties(student_Profile)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentProfile {
 
     @Id
@@ -103,26 +105,22 @@ public class StudentProfile {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    // 🔹 Break infinite loop: StudentProfile -> IntegrityCase
     @OneToMany(mappedBy = "studentProfile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<IntegrityCase> integrityCases = new ArrayList<>();
 
+    // 🔹 Break infinite loop: StudentProfile -> RepeatOffenderRecord
     @OneToOne(mappedBy = "studentProfile", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private RepeatOffenderRecord repeatOffenderRecord;
 
-    // ✅ REQUIRED BY JPA
+    // Required by JPA
     public StudentProfile() {}
 
-    /**
-     * 🔥 CRITICAL FIX
-     * Allows Jackson to deserialize:
-     * "studentProfile": "string"
-     * without throwing 500
-     */
+    // Jackson deserialization fix for "studentProfile": "string"
     @JsonCreator
-    public StudentProfile(String value) {
-        // intentionally empty
-        // prevents Jackson deserialization crash
-    }
+    public StudentProfile(String value) {}
 
     // Getters & Setters
     public Long getId() { return id; }
