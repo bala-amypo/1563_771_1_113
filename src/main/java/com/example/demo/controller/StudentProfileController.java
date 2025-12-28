@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/students")
 @Tag(name = "Student Profile")
+@SecurityRequirement(name = "bearerAuth")
 public class StudentProfileController {
     private final StudentProfileService service;
 

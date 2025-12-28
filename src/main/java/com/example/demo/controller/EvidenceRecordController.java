@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/evidence")
 @Tag(name = "Evidence Records")
+@SecurityRequirement(name = "bearerAuth")
 public class EvidenceRecordController {
     private final EvidenceRecordService service;
 

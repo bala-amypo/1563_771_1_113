@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/penalties")
 @Tag(name = "Penalty Actions")
+@SecurityRequirement(name = "bearerAuth")
 public class PenaltyActionController {
     private final PenaltyActionService service;
 

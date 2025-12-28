@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cases")
 @Tag(name = "Integrity Cases")
+@SecurityRequirement(name = "bearerAuth")
 public class IntegrityCaseController {
     private final IntegrityCaseService service;
 
