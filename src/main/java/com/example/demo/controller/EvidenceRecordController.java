@@ -28,68 +28,12 @@
 
 
 
-// package com.example.demo.controller;
-
-// import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-// import com.example.demo.entity.EvidenceRecord;
-// import com.example.demo.service.EvidenceRecordService;
-// import io.swagger.v3.oas.annotations.Operation;
-// import io.swagger.v3.oas.annotations.tags.Tag;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.*;
-
-// import java.util.List;
-
-// @RestController
-// @RequestMapping("/api/evidence")
-// @Tag(name = "Evidence Records")
-// @SecurityRequirement(name = "bearerAuth")
-// public class EvidenceRecordController {
-
-//     private final EvidenceRecordService service;
-
-//     public EvidenceRecordController(EvidenceRecordService service) {
-//         this.service = service;
-//     }
-
-//     @PostMapping
-//     @Operation(summary = "Submit evidence")
-//     public ResponseEntity<EvidenceRecord> submitEvidence(@RequestBody EvidenceRecord e) {
-//         return ResponseEntity.ok(service.submitEvidence(e));
-//     }
-
-//     @GetMapping
-//     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
-//         return ResponseEntity.ok(service.getAllEvidence());
-//     }
-
-//     @GetMapping("/{id}")
-//     public ResponseEntity<EvidenceRecord> getEvidenceById(@PathVariable Long id) {
-//         return ResponseEntity.ok(service.getEvidenceById(id));
-//     }
-
-//     @GetMapping("/case/{caseId}")
-//     public ResponseEntity<List<EvidenceRecord>> getEvidenceByCase(@PathVariable Long caseId) {
-//         return ResponseEntity.ok(service.getEvidenceByCase(caseId));
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
 package com.example.demo.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import com.example.demo.entity.EvidenceRecord;
 import com.example.demo.service.EvidenceRecordService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -108,27 +52,83 @@ public class EvidenceRecordController {
         this.service = service;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping
     @Operation(summary = "Submit evidence")
     public ResponseEntity<EvidenceRecord> submitEvidence(@RequestBody EvidenceRecord e) {
-        return ResponseEntity.status(201).body(service.submitEvidence(e));
+        return ResponseEntity.ok(service.submitEvidence(e));
     }
 
-    @GetMapping(produces = "application/json")
-    @Operation(summary = "Get all evidence records")
+    @GetMapping
     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
         return ResponseEntity.ok(service.getAllEvidence());
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
-    @Operation(summary = "Get evidence by ID")
+    @GetMapping("/{id}")
     public ResponseEntity<EvidenceRecord> getEvidenceById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getEvidenceById(id));
     }
 
-    @GetMapping(value = "/case/{caseId}", produces = "application/json")
-    @Operation(summary = "Get evidence by case ID")
+    @GetMapping("/case/{caseId}")
     public ResponseEntity<List<EvidenceRecord>> getEvidenceByCase(@PathVariable Long caseId) {
         return ResponseEntity.ok(service.getEvidenceByCase(caseId));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+// package com.example.demo.controller;
+
+// import com.example.demo.entity.EvidenceRecord;
+// import com.example.demo.service.EvidenceRecordService;
+// import io.swagger.v3.oas.annotations.Operation;
+// import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+// import io.swagger.v3.oas.annotations.tags.Tag;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.web.bind.annotation.*;
+
+// import java.util.List;
+
+// @RestController
+// @RequestMapping("/api/evidence")
+// @Tag(name = "Evidence Records")
+// @SecurityRequirement(name = "bearerAuth")
+// public class EvidenceRecordController {
+
+//     private final EvidenceRecordService service;
+
+//     public EvidenceRecordController(EvidenceRecordService service) {
+//         this.service = service;
+//     }
+
+//     @PostMapping(consumes = "application/json", produces = "application/json")
+//     @Operation(summary = "Submit evidence")
+//     public ResponseEntity<EvidenceRecord> submitEvidence(@RequestBody EvidenceRecord e) {
+//         return ResponseEntity.status(201).body(service.submitEvidence(e));
+//     }
+
+//     @GetMapping(produces = "application/json")
+//     @Operation(summary = "Get all evidence records")
+//     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
+//         return ResponseEntity.ok(service.getAllEvidence());
+//     }
+
+//     @GetMapping(value = "/{id}", produces = "application/json")
+//     @Operation(summary = "Get evidence by ID")
+//     public ResponseEntity<EvidenceRecord> getEvidenceById(@PathVariable Long id) {
+//         return ResponseEntity.ok(service.getEvidenceById(id));
+//     }
+
+//     @GetMapping(value = "/case/{caseId}", produces = "application/json")
+//     @Operation(summary = "Get evidence by case ID")
+//     public ResponseEntity<List<EvidenceRecord>> getEvidenceByCase(@PathVariable Long caseId) {
+//         return ResponseEntity.ok(service.getEvidenceByCase(caseId));
+//     }
+// }
