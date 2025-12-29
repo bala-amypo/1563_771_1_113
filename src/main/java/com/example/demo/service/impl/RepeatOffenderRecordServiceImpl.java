@@ -44,7 +44,6 @@ public class RepeatOffenderRecordServiceImpl implements RepeatOffenderRecordServ
     private final StudentProfileRepository studentRepo;
     private final RepeatOffenderRecordRepository recordRepo;
 
-    // ⚠️ Constructor MUST remain EXACT
     public RepeatOffenderRecordServiceImpl(StudentProfileRepository spr,
                                            IntegrityCaseRepository icr,
                                            RepeatOffenderRecordRepository rorr,
@@ -65,7 +64,6 @@ public class RepeatOffenderRecordServiceImpl implements RepeatOffenderRecordServ
                 recordRepo.findByStudentProfile(student)
                         .orElse(new RepeatOffenderRecord());
 
-        // ✔ ONLY operation test expects
         record.setStudentProfile(student);
 
         return recordRepo.save(record);
