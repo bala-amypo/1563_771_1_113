@@ -51,14 +51,12 @@ public class EvidenceRecordServiceImpl implements EvidenceRecordService {
 
     @Override
     public EvidenceRecord submitEvidence(EvidenceRecord e) {
-        // Ensure case exists (as per original code)
         caseRepo.findById(e.getIntegrityCase().getId());
         return repo.save(e);
     }
 
     @Override
     public List<EvidenceRecord> getEvidenceByCase(Long caseId) {
-        // Test-safe: filter in memory
         return repo.findAll()
                 .stream()
                 .filter(er -> er.getIntegrityCase() != null
