@@ -20,19 +20,16 @@ public class RepeatOffenderRecordController {
         this.service = service;
     }
 
-    // POST /api/repeat-offenders/refresh/{studentId}
     @PostMapping("/refresh/{studentId}")
     public ResponseEntity<RepeatOffenderRecord> refresh(@PathVariable Long studentId) {
         return ResponseEntity.ok(service.refreshRepeatOffenderData(studentId));
     }
 
-    // GET /api/repeat-offenders/student/{studentId}
     @GetMapping("/student/{studentId}")
     public ResponseEntity<RepeatOffenderRecord> getByStudent(@PathVariable Long studentId) {
         return ResponseEntity.ok(service.getRecordByStudent(studentId));
     }
 
-    // GET /api/repeat-offenders
     @GetMapping
     public ResponseEntity<List<RepeatOffenderRecord>> getAll() {
         return ResponseEntity.ok(service.getAllRepeatOffenders());

@@ -18,7 +18,6 @@ public class RepeatOffenderRecord {
     private LocalDate firstIncidentDate;
     private String flagSeverity;
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public StudentProfile getStudentProfile() { return studentProfile; }

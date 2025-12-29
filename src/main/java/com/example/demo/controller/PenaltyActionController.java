@@ -53,28 +53,24 @@ public class PenaltyActionController {
         this.service = service;
     }
 
-    // POST /api/penalties
     @PostMapping
     @Operation(summary = "Add penalty")
     public ResponseEntity<PenaltyAction> addPenalty(@RequestBody PenaltyAction p) {
         return ResponseEntity.ok(service.addPenalty(p));
     }
 
-    // GET /api/penalties
     @GetMapping
     @Operation(summary = "List all penalties")
     public ResponseEntity<List<PenaltyAction>> getAllPenalties() {
         return ResponseEntity.ok(service.getAllPenalties());
     }
 
-    // GET /api/penalties/{id}
     @GetMapping("/{id}")
     @Operation(summary = "Get penalty by ID")
     public ResponseEntity<PenaltyAction> getPenaltyById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getPenaltyById(id));
     }
 
-    // GET /api/penalties/case/{caseId}
     @GetMapping("/case/{caseId}")
     @Operation(summary = "Get penalties for a case")
     public ResponseEntity<List<PenaltyAction>> getPenaltiesByCase(@PathVariable Long caseId) {

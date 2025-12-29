@@ -52,26 +52,22 @@ public class EvidenceRecordController {
         this.service = service;
     }
 
-    // POST /api/evidence
     @PostMapping
     @Operation(summary = "Submit evidence")
     public ResponseEntity<EvidenceRecord> submitEvidence(@RequestBody EvidenceRecord e) {
         return ResponseEntity.ok(service.submitEvidence(e));
     }
 
-    // GET /api/evidence
     @GetMapping
     public ResponseEntity<List<EvidenceRecord>> getAllEvidence() {
         return ResponseEntity.ok(service.getAllEvidence());
     }
 
-    // GET /api/evidence/{id}
     @GetMapping("/{id}")
     public ResponseEntity<EvidenceRecord> getEvidenceById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getEvidenceById(id));
     }
 
-    // GET /api/evidence/case/{caseId}
     @GetMapping("/case/{caseId}")
     public ResponseEntity<List<EvidenceRecord>> getEvidenceByCase(@PathVariable Long caseId) {
         return ResponseEntity.ok(service.getEvidenceByCase(caseId));
