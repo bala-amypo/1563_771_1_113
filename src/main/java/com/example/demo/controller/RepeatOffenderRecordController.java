@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 import com.example.demo.entity.RepeatOffenderRecord;
 import com.example.demo.service.RepeatOffenderRecordService;
@@ -9,6 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/repeat-offenders")
+@SecurityRequirement(name = "bearerAuth")
+
 public class RepeatOffenderRecordController {
 
     private final RepeatOffenderRecordService service;
@@ -17,8 +20,8 @@ public class RepeatOffenderRecordController {
         this.service = service;
     }
 
-    // PUT /api/repeat-offenders/refresh/{studentId}
-    @PutMapping("/refresh/{studentId}")
+    // POST /api/repeat-offenders/refresh/{studentId}
+    @PostMapping("/refresh/{studentId}")
     public ResponseEntity<RepeatOffenderRecord> refresh(@PathVariable Long studentId) {
         return ResponseEntity.ok(service.refreshRepeatOffenderData(studentId));
     }
